@@ -1,0 +1,6 @@
+print ('-_-'*30)
+n_in = str(input('\nDigite  um numero entre 0 a 9999 => '))
+print ('\nUnidade dele = {}'.format(n_in[3]))
+print ('\nDezena dele = {}'.format(n_in[2]))
+print ('\nCentena dele = {}'.format(n_in[1]))
+print ('\nMilhar dele = {}'.format(n_in[0]))
