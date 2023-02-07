@@ -1,3 +1,5 @@
 teste de versionamento na V1 com textos.
 
 mais um linha para a V2 do meu arquivo
+
+Estou inserindo mais uma linha teste
