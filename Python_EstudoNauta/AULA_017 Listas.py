@@ -36,3 +36,16 @@ comida.sort() #ordem crescente
 print(f'LINHA 35 {comida}')
 comida.sort(reverse=True)
 print(f'LINHA 38 {comida}')
+
+#Copia de dados
+lst_comida_1=[]
+lst_comida_2=[]
+lst_comida_1.append(comida[:3])
+lst_comida_1.append(comida[3:])
+print(f'LINHA 44 {lst_comida_1}')
+print(f'LINHA 46 - Comp da lista - {len(lst_comida_1)}')
+print(f'LINHA 47 - Comp do primeiro item da lista - {len(lst_comida_1[0])}')
+lst_comida_1.insert(0,(2,1))
+print(f'LINHA 49 Posso validar se é lista {type(lst_comida_1[0])}')
+print(f'LINHA 50 {lst_comida_1}')
+print(f'LINHA 51 {lst_comida_1[1][0]}') #Selecionar o segundo grupo e printar a primeira comida
