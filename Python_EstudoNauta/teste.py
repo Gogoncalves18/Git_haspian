@@ -1,12 +1,7 @@
-from operator import itemgetter
-ranking={}
-dict_temp={}
-nomes={'nome': 'Pedro', 'idade': '25', 'nome': 'Joao', 'idade': '30', 
-       'nome': 'Rafa', 'idade': '35', 'nome': 'Pepe', 'idade': '19', 
-       'nome': 'robert', 'idade': '65', 'nome': 'rodrigo', 'idade': '21', 
-       'nome': 'tais', 'idade': '32'}
-ranking=sorted(nomes.items(), key=itemgetter(1))
-print(ranking)
-
+lista=[{'nome': 'gu', 'idade': 41, 'sexo': 'M'}, {'nome': 'val', 'idade': 40, 'sexo': 'F'}]
+idade_med=0
+for i in lista:
+    idade_med+=i["idade"]
+    print(idade_med)
 
 
