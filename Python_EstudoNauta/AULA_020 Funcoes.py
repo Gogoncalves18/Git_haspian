@@ -37,7 +37,7 @@ def dobra2(lst):
         print(f'Ao qual dobrarei para {lst2[pos]}')
     print('-'*20)
     print(f'A lista da funcao ficou {lst2}')
-    print(__spec__(lst2))
+    
 
 #PROGRAMA PRINCIPAL:
 

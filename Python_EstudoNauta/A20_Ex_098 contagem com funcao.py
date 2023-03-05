@@ -23,5 +23,3 @@ def seq(revr=False, inic=0, fim=0, passo=0):
 seq()
 seq(revr=True)
 seq(inic=2, fim=10, passo=2) 
-
-
