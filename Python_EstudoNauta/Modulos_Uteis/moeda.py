@@ -7,12 +7,14 @@ def moeda(vlr):
     try:
         num = float(vlr)
     except ValueError:
-        print('Você precisa digitar um valor numérico')
+        msg = 'Você precisa digitar um valor numérico'
+        return msg
     except TypeError:
         print('Por favor, digite números decimais com ","')
     else:
         resp = f'R${num:.2f}'.replace('.',',')
-        return resp
+        if resp != None: #Necessario adicionar esta condicional senão o valor de resp sempre será lido como None quando nao informo numero
+            return resp
     
     
 
