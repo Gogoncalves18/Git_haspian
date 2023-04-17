@@ -1,7 +1,7 @@
-import sys, pygame
+import pygame
 from settings import Settings
 from ships import Ship
-
+import game_functions as gf
 
 def run_game(): #Inicializa o jogo e cria obj para tela
     pygame.init() #Inicialização das funções do Pygame em segundo plano
@@ -11,10 +11,7 @@ pygame.display.set_caption("Invasão Alien")
 ship = Ship(screen) #cria uma espaçonave antes do while para não criar uma espaçonave a cada laço
 bg_color = ai_settings.bg_color #Cor para tela fundo
 while True:
-    for event in pygame.event.get(): #Este laço pega todos eventos que vem do teclado do sistema quando o usuario joga, assim criamos condicionais com os eventos que estamos lendo
-        if event.type == pygame.QUIT:
-            sys.exit()
-    screen.fill(bg_color) #Metodo para preencher cor na janela
-    ship.blitme() #Desenhamos a espaçonave depois de preencher o fundo assim a espaçonave aparecerá
-    pygame.display.flip() #Este metodo atualiza a janela sempre para a mais recente sempre que passo pelo laço while. Assim os elementos recebem no posição o que dá ideia de movimento
+    gf.check_events(ship) # Função para pegar os eventos do teclado
+    ship.update()
+    gf.update_screen(bg_color, screen, ship)
     run_game() #puxa o metodo que inicializa o jogo e entra no laço principal
