@@ -21,10 +21,10 @@ class Ship():
 
     def update(self):
         """Atualiza a posicao da espaçonave de acordo com a flag moving"""
-        if self.moving_right: 
+        if self.moving_right and self.rect.right < self.screen_rect.right: #rect.right retorna o valor que a imagem se encontra na tela e screen rect.right o tamanho da tela 
             #self.rect.centerx += 1  #Jogo a imagem 1 pix para direita em relação ao ponto que ela começou, ela estava no centro da tela
-            self.center += self.ai_settings.ship_speed_factor
-        elif self.moving_left:
+            self.center += self.ai_settings.ship_speed_factor            
+        elif self.moving_left and self.rect.left > 0:
             #self.rect.centerx -= 1 #Jogo a imagem 1 pix para esquerda em relação ao ponto que ela começou, ela estava no centro da tela ou ao ultimo ponto
-            self.center -= self.ai_settings.ship_speed_factor
-        self.rect.centerx = self.center
+            self.center -= self.ai_settings.ship_speed_factor        
+        self.rect.centerx = self.center #Atualizo o valor da posição da imagem pela relação de centro dela com a tela chamada screen

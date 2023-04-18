@@ -5,15 +5,23 @@ def check_events(ship):
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN: #Evento de keydown é de tecla pressionada, key up é de tecla solta
-            if event.key == pygame.K_RIGHT: #Identificando a tecla da direita
-                ship.moving_right = True #altera o atributo dentro da classe Ship para fazer a espaçonave andar para esquerda
-            elif event.key == pygame.K_LEFT:
-                ship.moving_left = True
+            check_keydown_events(event, ship) #Aciono a função que corresponde a pressionar o teclado, dando a ele o evento e a ship
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_RIGHT:
-                ship.moving_right = False
-            elif event.key == pygame.K_LEFT:
-                ship.moving_left = False
+            check_keyup_events(event, ship)
+
+def check_keydown_events(event, ship):
+    """Responde a eventos que pressiona o teclado"""
+    if event.key == pygame.K_RIGHT: #Identificando a tecla da direita
+        ship.moving_right = True #altera o atributo dentro da classe Ship para fazer a espaçonave andar para esquerda
+    elif event.key == pygame.K_LEFT:
+        ship.moving_left = True
+
+def check_keyup_events(event, ship):
+    """Responde a eventos que solta o teclado"""
+    if event.key == pygame.K_RIGHT:
+        ship.moving_right = False
+    elif event.key == pygame.K_LEFT:
+        ship.moving_left = False
      
 
 def update_screen(bg_color, screen, ship):
