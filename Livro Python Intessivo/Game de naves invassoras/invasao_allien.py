@@ -15,6 +15,7 @@ bg_color = ai_settings.bg_color #Cor para tela fundo
 while True:
     gf.check_events(ai_settings, screen, ship, bullets) # Função para pegar os eventos do teclado, aqui inicia os modulos de objetos de nave e projeteis
     ship.update()
-    bullets.update() #Este metodo chama a atualização de cada objeto colocado dentro da Função Group de pygame.sprite
+    gf.update_bullets(bullets) #Chama a funcao para atualizar os projeteis em game_functions
     gf.update_screen(ai_settings, bg_color, screen, ship, bullets) #aqui atualizo a tela com os objetos
     run_game() #puxa o metodo que inicializa o jogo e entra no laço principal
+
