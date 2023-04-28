@@ -13,7 +13,7 @@ class Bullet(Sprite):
         self.y = float(self.rect.y) #Armazena a posicao do projetil como decimal
         self.color = ai_settings.bullet_color
         self.speed_factor = ai_settings.bullet_speed_factor
-
+        
     
     def update(self):
         """Move o projetil para cima na tela"""
