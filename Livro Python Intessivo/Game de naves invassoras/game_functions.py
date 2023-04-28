@@ -18,8 +18,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     elif event.key == pygame.K_LEFT:
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
-        new_bullet = Bullet(ai_settings, screen, ship) #Cria um novo projetil e adiciona ao grupo de projeteis
-        bullets.add(new_bullet) #Cada objeto do projetil vai para o grupo bullets no código principal através do metodo add que é da classe Group
+        fire_bullet(ai_settings, screen, ship, bullets) #Função deste mesmo módulo que cuida da qtd de tiros que posso disparar
 
 def check_keyup_events(event, ship):
     """Responde a eventos que solta o teclado"""
@@ -36,3 +35,18 @@ def update_screen(ai_settings, bg_color, screen, ship, bullets):
         bullet.draw_bullet() #aqui eu desenho na tela cada objeto, que usa uma função herdada no modulo bullet.py que atua sobre a classe Sprite
     ship.blitme() #Desenhamos a espaçonave depois de preencher o fundo assim a espaçonave aparecerá
     pygame.display.flip() #Este metodo atualiza a janela sempre para a mais recente sempre que passo pelo laço while. Assim os elementos recebem no posição o que dá ideia de movimento
+
+
+def update_bullets(bullets):
+    """Atualiza a posição dos projeteis e elimina os projeteis que atingiram o limite da tela"""
+    bullets.update() #Este metodo chama a atualização de cada objeto colocado dentro da Função Group de pygame.sprite
+    for bullet in bullets.copy():#Como não é recomendado modificar a lista em um laço, fizemos uma cópia para mante-la integra e mesmo assim ela fica referenciada
+        if bullet.rect.bottom <= 0: #Aqui valido se ela chegou ao top da tela
+            bullets.remove(bullet) #Removo o tiro que foi instaciado 
+        #print(len(bullets)) #Aqui valido se a quantidade de tiros disparado está sendo eleminada da lista
+
+def fire_bullet(ai_settings, screen, ship, bullets):
+     """Controle a qtd de tiros que posso efetuar até que os mesmos rompam o limite da tela"""
+     if len(bullets) < ai_settings.bullets_allowed: #Valido se os tiros disparados não atingiram a qtd de tiros da nave até o tiro atravessar a tela toda, depois recarrega
+            new_bullet = Bullet(ai_settings, screen, ship) #Cria um novo projetil e adiciona ao grupo de projeteis
+            bullets.add(new_bullet) #Cada objeto do projetil vai para o grupo bullets no código principal através do metodo add que é da classe Group
