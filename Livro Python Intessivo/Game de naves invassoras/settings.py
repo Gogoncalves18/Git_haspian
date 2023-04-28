@@ -10,3 +10,4 @@ class Settings():
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = 255, 69, 0
+        self.bullets_allowed = 3 #tiros permitido no carregador da nave
