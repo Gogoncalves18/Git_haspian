@@ -11,3 +11,7 @@ class Settings():
         self.bullet_height = 15
         self.bullet_color = 255, 69, 0
         self.bullets_allowed = 3 #tiros permitido no carregador da nave
+        #Configurações dos aliens
+        self.alien_speed_factor = 1 #Define a velocidade de movimento lateral na linha da tela
+        self.fleet_drop_speed = 10 #define a velocidade de descida dos aliens na tela
+        self.fleet_direction = 1 #Onde 1 é direita e -1 é esquerda

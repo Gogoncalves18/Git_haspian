@@ -14,11 +14,12 @@ bullets = Group() #Cria um grupo ao qual serão armazenado os projeteis, como se
 bg_color = ai_settings.bg_color #Cor para tela fundo
 #alien = Alien(ai_settings, screen)
 aliens = Group() #Grupo da frota de aliens
-gf.create_fleet(ai_settings, screen, aliens)
+gf.create_fleet(ai_settings, screen, ship, aliens)
 while True:
     gf.check_events(ai_settings, screen, ship, bullets) # Função para pegar os eventos do teclado, aqui inicia os modulos de objetos de nave e projeteis
     ship.update()
     gf.update_bullets(bullets) #Chama a funcao para atualizar os projeteis em game_functions
+    gf.update_aliens(ai_settings, aliens) #Chama o metodo para atualizar a posição dos aliens dentro do grupo aliens
     gf.update_screen(ai_settings, bg_color, screen, ship, aliens, bullets) #aqui atualizo a tela com os objetos
     run_game() #puxa o metodo que inicializa o jogo e entra no laço principal
 

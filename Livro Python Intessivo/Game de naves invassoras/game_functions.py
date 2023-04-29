@@ -55,18 +55,56 @@ def fire_bullet(ai_settings, screen, ship, bullets):
             new_bullet = Bullet(ai_settings, screen, ship) #Cria um novo projetil e adiciona ao grupo de projeteis
             bullets.add(new_bullet) #Cada objeto do projetil vai para o grupo bullets no código principal através do metodo add que é da classe Group
 
-def create_fleet(ai_settings, screen, aliens):
+def create_fleet(ai_settings, screen, ship, aliens):
     """Cria a frota de aliens"""
     alien = Alien(ai_settings, screen) # Este alien não faz parte da frota, ele serve apenas para definir as variaveis 
     alien_width = alien.rect.width #Para não ficar colocando rect em tudo, gravamos a largura do retangula da imagem nesta variavel
+    number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width) #Recebo da funcao o numero de aliens que cabe em uma linha da tela
+    number_rows = get_number_rows(ai_settings, ship.rect.height, alien.rect.height)
+    for row_number in range(number_rows):
+        for  alien_number in range(number_aliens_x): #abro um laço para popular cada alien dentro do grupo com sua posição em x
+            create_alien(ai_settings, screen, aliens, alien_number, row_number)
+
+def get_number_aliens_x(ai_settings, alien_width):
+    """Determina o numero de aliens que cabem em x"""
     available_space_x = ai_settings.screen_with - 2 * alien_width #Aqui eu faço um calculo de espaço util de distribuição dos aliens na largura da tela
     #pego a largura total da tela que vem de settings e diminuo por 2 aliens para ter uma margem de ambos os lados da tela
     number_aliens_x = int(available_space_x / (2 * alien_width)) #Calculo quantos aliens cabe na tela util com as margens
-    for  alien_number in range(number_aliens_x): #abro um laço para popular cada alien dentro do grupo com sua posição em x
-        alien = Alien(ai_settings, screen) #Instancio a Classe de objeto alien nesta variavel para criar um objeto para cada laço
-        #alien.x = alien_width + 2 * alien_width * alien_number
-        alien.x = alien_width + (alien_number * (alien_width*2)) # defino a posição do objeto a cada laço considerando um primeiro espaço representado pela largura (alien_width)
-        #mutiplica por dois de sua largura para dobra a posição e o Alien_number mutiplicar a cada numero de laço pela posição do laço o que fará minha posição x ir para frente
-        #print(f'Laço = {alien_number} - Pos = {alien.x}') #Exemplo para testar o passo entre cada alien
-        alien.rect.x = alien.x #Com a nova posição do objeto eu grava em um novo x para o atributo rect do objeto 
-        aliens.add(alien) #adiciono o objeto que sua posição no grupo Aliens.
+    return number_aliens_x
+
+def get_number_rows(ai_settings, ship_height, alien_height):
+    """Determina o numero de linhas de aliens que cabem em y"""
+    available_space_y = (ai_settings.screen_height - (2 * alien_height) - ship_height) #Aqui eu faço um calculo de espaço util de distribuição dos aliens na altura da tela
+    #pego a altura total da tela que vem de settings e diminuo por 3 aliens  e mais a nave
+    number_rows = int(available_space_y / (3 * alien_height)) #Calculo quantos linhas cabe na tela util
+    return number_rows
+
+def create_alien(ai_settings, screen, aliens, alien_number, row_number):
+    """Cria o objeto alien e sua posição na linha"""
+    alien = Alien(ai_settings, screen) #Instancio a Classe de objeto alien nesta variavel para criar um objeto para cada laço
+    alien_width = alien.rect.width #Para não ficar colocando rect em tudo, gravamos a largura do retangula da imagem nesta variavel
+    alien.x = alien_width + (alien_number * (alien_width*2)) # defino a posição do objeto a cada laço considerando um primeiro espaço representado pela largura (alien_width)
+    #mutiplica por dois de sua largura para dobra a posição e o Alien_number mutiplicar a cada numero de laço pela posição do laço o que fará minha posição x ir para frente
+    #print(f'Laço = {alien_number} - Pos = {alien.x}') #Exemplo para testar o passo entre cada alien
+    alien.rect.x = alien.x #Com a nova posição do objeto eu grava em um novo x para o atributo rect do objeto 
+    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number #Quem fará o valor Y se sempre alterado é o row_number que recebe interações do laço for
+    #na função create_fleet que chama a função create_alien
+    aliens.add(alien) #adiciono o objeto que sua posição no grupo Aliens.
+    
+def update_aliens(ai_settings, aliens):
+    """Verifica se os aliens estão na borda e então atualiza"""
+    check_fleet_edges(ai_settings, aliens) #Chamo a função para me dizer se estou com algum alien na borda
+    aliens.update() #atualizo as imagens dos aliens na tela
+
+def  check_fleet_edges(ai_settings, aliens):
+    """Responde se algum alien atingiu as bordas da tela"""
+    for alien in aliens.sprites():
+        if alien.check_edges(): #Se ela me retornar verdadeiro, aí mudo a direção das naves no modulo settings
+            change_fleet_direction(ai_settings, aliens) 
+            break #Quebro o laço porque não faz mais sentido manter o for
+
+def change_fleet_direction(ai_settings, aliens):
+    """Faz toda a frota descer e mudar de direção"""
+    for alien in aliens.sprites(): #Para cada alien iremos atualizar a posição y dentro do grupo sprites() do pygame
+        alien.rect.y += ai_settings.fleet_drop_speed
+        ai_settings.fleet_direction *= -1
