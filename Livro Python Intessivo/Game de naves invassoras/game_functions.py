@@ -41,8 +41,11 @@ def update_screen(ai_settings, bg_color, screen, ship, aliens, bullets):
     pygame.display.flip() #Este metodo atualiza a janela sempre para a mais recente sempre que passo pelo laço while. Assim os elementos recebem no posição o que dá ideia de movimento
 
 
-def update_bullets(bullets):
+def update_bullets(aliens, bullets):
     """Atualiza a posição dos projeteis e elimina os projeteis que atingiram o limite da tela"""
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True) #funcao do modulo sprit que compara
+    #dois grupos de objetos e devolve um dict para validar o que colidiu com o que. Os 2 True é para definir
+    #se o pygame deve apagar os objetos da tela se eles colidirem. Neste caso, apagará dos dois grupos
     bullets.update() #Este metodo chama a atualização de cada objeto colocado dentro da Função Group de pygame.sprite
     for bullet in bullets.copy():#Como não é recomendado modificar a lista em um laço, fizemos uma cópia para mante-la integra e mesmo assim ela fica referenciada
         if bullet.rect.bottom <= 0: #Aqui valido se ela chegou ao top da tela

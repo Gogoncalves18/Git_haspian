@@ -12,14 +12,12 @@ class Bullet(Sprite):
         self.rect.top = ship.rect.top #aqui posiciono o top dela com o top da nave, portanto o projetil ficará tapado pela nave
         self.y = float(self.rect.y) #Armazena a posicao do projetil como decimal
         self.color = ai_settings.bullet_color
-        self.speed_factor = ai_settings.bullet_speed_factor
-        
+        self.speed_factor = ai_settings.bullet_speed_factor    
     
     def update(self):
         """Move o projetil para cima na tela"""
         self.y -= self.speed_factor #Movimento o pix em Y de acordo com o atributo speed_factor em settings
         self.rect.y = self.y #atualizo a posição na tela
-
 
     def draw_bullet(self):
         """desenha o projetil na tela"""
