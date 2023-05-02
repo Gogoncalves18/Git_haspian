@@ -1,6 +1,7 @@
 import sys, pygame
 from bullet import Bullet 
 from alien import Alien
+from time import sleep
 #Aqui eu crio o objeto projetil na tela
 def check_events(ai_settings, screen, ship, bullets):
     """Responde a eventos provinientes do teclado"""
@@ -41,16 +42,22 @@ def update_screen(ai_settings, bg_color, screen, ship, aliens, bullets):
     pygame.display.flip() #Este metodo atualiza a janela sempre para a mais recente sempre que passo pelo laço while. Assim os elementos recebem no posição o que dá ideia de movimento
 
 
-def update_bullets(aliens, bullets):
+def update_bullets(ai_settings, screen, ship, aliens, bullets):
     """Atualiza a posição dos projeteis e elimina os projeteis que atingiram o limite da tela"""
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True) #funcao do modulo sprit que compara
-    #dois grupos de objetos e devolve um dict para validar o que colidiu com o que. Os 2 True é para definir
-    #se o pygame deve apagar os objetos da tela se eles colidirem. Neste caso, apagará dos dois grupos
+    check_bullet_collision(ai_settings, screen, ship, aliens, bullets)
     bullets.update() #Este metodo chama a atualização de cada objeto colocado dentro da Função Group de pygame.sprite
     for bullet in bullets.copy():#Como não é recomendado modificar a lista em um laço, fizemos uma cópia para mante-la integra e mesmo assim ela fica referenciada
         if bullet.rect.bottom <= 0: #Aqui valido se ela chegou ao top da tela
             bullets.remove(bullet) #Removo o tiro que foi instaciado 
-        #print(len(bullets)) #Aqui valido se a quantidade de tiros disparado está sendo eleminada da lista
+
+def check_bullet_collision(ai_settings, screen, ship, aliens, bullets):
+    """Valida a colisao entre projeteis e aliens e elimina o alien. E cria uma nova frota se for necessário"""
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True) #funcao do modulo sprit que compara
+    #dois grupos de objetos e devolve um dict para validar o que colidiu com o que. Os 2 True é para definir
+    #se o pygame deve apagar os objetos da tela se eles colidirem. Neste caso, apagará dos dois grupos
+    if len(aliens) == 0: #Valido se não há mais aliens no grupo
+        bullets.empty() #com o metodo empty() que é da função Group de Sprites, esvaziamos o numero de tiros
+        create_fleet(ai_settings, screen, ship, aliens) #E então recriamos a frota com a função de criar frota
 
 def fire_bullet(ai_settings, screen, ship, bullets):
      """Controle a qtd de tiros que posso efetuar até que os mesmos rompam o limite da tela"""
@@ -94,10 +101,14 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     #na função create_fleet que chama a função create_alien
     aliens.add(alien) #adiciono o objeto que sua posição no grupo Aliens.
     
-def update_aliens(ai_settings, aliens):
+def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
     """Verifica se os aliens estão na borda e então atualiza"""
     check_fleet_edges(ai_settings, aliens) #Chamo a função para me dizer se estou com algum alien na borda
     aliens.update() #atualizo as imagens dos aliens na tela
+    if pygame.sprite.spritecollideany(ship, aliens):
+        ship_hit(ai_settings, stats , screen, ship, aliens, bullets)
+        #print(stats.ships_left)
+    check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
 
 def  check_fleet_edges(ai_settings, aliens):
     """Responde se algum alien atingiu as bordas da tela"""
@@ -110,4 +121,24 @@ def change_fleet_direction(ai_settings, aliens):
     """Faz toda a frota descer e mudar de direção"""
     for alien in aliens.sprites(): #Para cada alien iremos atualizar a posição y dentro do grupo sprites() do pygame
         alien.rect.y += ai_settings.fleet_drop_speed
-        ai_settings.fleet_direction *= -1
+    ai_settings.fleet_direction *= -1
+
+def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+    """Responde ao fato quando a espaçonave colide com um alienigena"""
+    if stats.ships_left > 0: #Valido se há vida disponivel para o jogo
+        stats.ships_left -= 1 #Diminuimos o numero de vida do modulo game_stats que influencia no modulo settings
+        aliens.empty() #Esvazia o grupo de aliens
+        bullets.empty() #esvazia o grupo de tiros
+        create_fleet(ai_settings, screen, ship, aliens) #Cria nova frota de aliens 
+        ship.center_ship()
+        sleep(0.5)
+    else: 
+        stats.game_active = False
+
+def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
+    """Verifica se o alien chegou a parte inferior da tela"""
+    screen_rect = screen.get_rect() #Pego a dimensao da tela
+    for alien in aliens.sprites():
+        if alien.rect.bottom >= screen_rect.bottom:
+            ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+            break
