@@ -28,3 +28,8 @@ class Ship():
             #self.rect.centerx -= 1 #Jogo a imagem 1 pix para esquerda em relação ao ponto que ela começou, ela estava no centro da tela ou ao ultimo ponto
             self.center -= self.ai_settings.ship_speed_factor        
         self.rect.centerx = self.center #Atualizo o valor da posição da imagem pela relação de centro dela com a tela chamada screen
+
+    def center_ship(self):
+        """Centraliza a nave na tela"""
+        self.center = self.screen_rect.centerx #Para ter uma referencia para centralizar a nave
+        
