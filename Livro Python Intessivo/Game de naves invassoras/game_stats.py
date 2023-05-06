@@ -4,7 +4,7 @@ class GameStats():
         """Inicializa os dados estatisticos"""
         self.ai_settings = ai_settings
         self.reset_stats()
-        self.game_active = True #Flag para encerrar o jogo sempre que a vida acabar
+        self.game_active = False #Flag para encerrar o jogo sempre que a vida acabar
 
     def reset_stats(self):
         """Inicializa os dados estatisticos que podem mudar ao longo do jogo"""
