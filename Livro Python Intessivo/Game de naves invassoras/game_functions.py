@@ -32,13 +32,15 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
      
 
-def update_screen(ai_settings, bg_color, screen, ship, aliens, bullets):
+def update_screen(ai_settings, bg_color, screen, stats, ship, aliens, bullets, play_button):
     """Atualiza as imagens na tela e altera para nova tela como um refresh"""
     screen.fill(bg_color) #Metodo para preencher cor na janela
     for bullet in bullets.sprites(): #aqui eu pego a lista que tem os projeteis armazenados e uso um metodo desta da classe Group que varre a lista
         bullet.draw_bullet() #aqui eu desenho na tela cada objeto, que usa uma função herdada no modulo bullet.py que atua sobre a classe Sprite
     ship.blitme() #Desenhamos a espaçonave depois de preencher o fundo assim a espaçonave aparecerá
     aliens.draw(screen) #Pygame quando chama o metodo draw de dentro de um grupo, ele desenha cada objeto do grupo pegando a posição do rect
+    if not stats.game_active: #Valida se o atributo do jogo esta com o stats False (isto é, não esta rodando)
+        play_button.draw_button() #Chama o metodo para desenhar o botao que está dentro do modulo botao
     pygame.display.flip() #Este metodo atualiza a janela sempre para a mais recente sempre que passo pelo laço while. Assim os elementos recebem no posição o que dá ideia de movimento
 
 
