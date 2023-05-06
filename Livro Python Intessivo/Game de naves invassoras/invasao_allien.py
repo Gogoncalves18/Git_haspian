@@ -20,7 +20,7 @@ bg_color = ai_settings.bg_color #Cor para tela fundo
 aliens = Group() #Grupo da frota de aliens
 gf.create_fleet(ai_settings, screen, ship, aliens)
 while True:
-    gf.check_events(ai_settings, screen, ship, bullets) # Função para pegar os eventos do teclado, aqui inicia os modulos de objetos de nave e projeteis
+    gf.check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets) # Função para pegar os eventos do teclado, aqui inicia os modulos de objetos de nave e projeteis
     if stats.game_active:
         ship.update()
         gf.update_bullets(ai_settings, screen, ship, aliens, bullets) #Chama a funcao para atualizar os projeteis em game_functions
