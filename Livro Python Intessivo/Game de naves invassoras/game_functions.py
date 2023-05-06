@@ -3,7 +3,7 @@ from bullet import Bullet
 from alien import Alien
 from time import sleep
 #Aqui eu crio o objeto projetil na tela
-def check_events(ai_settings, screen, ship, bullets):
+def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets):
     """Responde a eventos provinientes do teclado"""
     for event in pygame.event.get(): #Este laço pega todos eventos que vem do teclado do sistema quando o usuario joga, assim criamos condicionais com os eventos que estamos lendo
         if event.type == pygame.QUIT:
@@ -12,6 +12,22 @@ def check_events(ai_settings, screen, ship, bullets):
             check_keydown_events(event, ai_settings, screen, ship, bullets) #Aciono a função que corresponde a pressionar o teclado, dando a ele o evento e a ship
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
+        elif event.type == pygame.MOUSEBUTTONDOWN: #Captura o evento do mouse
+            mouse_x, mouse_y = pygame.mouse.get_pos() #Metodo para pegar a posicao do click do mouse
+            check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y) #Chama funcao para passar os parametros do clique
+
+def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y):
+    """Inicia um novo jogo quando o jogador cliclar em play"""
+    button_click = play_button.rect.collidepoint(mouse_x, mouse_y)#Rect do botao é a area desenhada no modulo botao, a funcao verificar se verdadeiro ou falso se 
+    #a coordenada x,y está dentro desta area 
+    if button_click and not stats.game_active: 
+        pygame.mouse.set_visible(False)
+        stats.reset_stats() #Reseta o numero de vidas em game_stats
+        stats.game_active = True #Ai digo ao programa, rode!
+        aliens.empty() #Esvazia o grupo de aliens no codigo principal
+        bullets.empty() #Esvazia o grupo de tiros disparados no codigo principal
+        create_fleet(ai_settings, screen, ship, aliens) #Cria nova frota
+        ship.center_ship() #Recentraliza a nave
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
     """Responde a eventos que pressiona o teclado"""
@@ -136,6 +152,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         sleep(0.5)
     else: 
         stats.game_active = False
+        pygame.mouse.set_visible(True)
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
     """Verifica se o alien chegou a parte inferior da tela"""
