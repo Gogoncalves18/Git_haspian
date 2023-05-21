@@ -21,6 +21,7 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     button_click = play_button.rect.collidepoint(mouse_x, mouse_y)#Rect do botao é a area desenhada no modulo botao, a funcao verificar se verdadeiro ou falso se 
     #a coordenada x,y está dentro desta area 
     if button_click and not stats.game_active: 
+        ai_settings.initialize_dynamic_settings()
         pygame.mouse.set_visible(False)
         stats.reset_stats() #Reseta o numero de vidas em game_stats
         stats.game_active = True #Ai digo ao programa, rode!
@@ -48,9 +49,10 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
      
 
-def update_screen(ai_settings, bg_color, screen, stats, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, bg_color, screen, stats, sb, ship, aliens, bullets, play_button):
     """Atualiza as imagens na tela e altera para nova tela como um refresh"""
     screen.fill(bg_color) #Metodo para preencher cor na janela
+    sb.show_score() #Desenho o placar pelo modulo scoreboard
     for bullet in bullets.sprites(): #aqui eu pego a lista que tem os projeteis armazenados e uso um metodo desta da classe Group que varre a lista
         bullet.draw_bullet() #aqui eu desenho na tela cada objeto, que usa uma função herdada no modulo bullet.py que atua sobre a classe Sprite
     ship.blitme() #Desenhamos a espaçonave depois de preencher o fundo assim a espaçonave aparecerá
@@ -60,21 +62,33 @@ def update_screen(ai_settings, bg_color, screen, stats, ship, aliens, bullets, p
     pygame.display.flip() #Este metodo atualiza a janela sempre para a mais recente sempre que passo pelo laço while. Assim os elementos recebem no posição o que dá ideia de movimento
 
 
-def update_bullets(ai_settings, screen, ship, aliens, bullets):
+def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Atualiza a posição dos projeteis e elimina os projeteis que atingiram o limite da tela"""
-    check_bullet_collision(ai_settings, screen, ship, aliens, bullets)
+    check_bullet_collision(ai_settings, screen, stats, sb, ship, aliens, bullets)
     bullets.update() #Este metodo chama a atualização de cada objeto colocado dentro da Função Group de pygame.sprite
     for bullet in bullets.copy():#Como não é recomendado modificar a lista em um laço, fizemos uma cópia para mante-la integra e mesmo assim ela fica referenciada
         if bullet.rect.bottom <= 0: #Aqui valido se ela chegou ao top da tela
             bullets.remove(bullet) #Removo o tiro que foi instaciado 
 
-def check_bullet_collision(ai_settings, screen, ship, aliens, bullets):
+def check_bullet_collision(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Valida a colisao entre projeteis e aliens e elimina o alien. E cria uma nova frota se for necessário"""
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True) #funcao do modulo sprit que compara
     #dois grupos de objetos e devolve um dict para validar o que colidiu com o que. Os 2 True é para definir
     #se o pygame deve apagar os objetos da tela se eles colidirem. Neste caso, apagará dos dois grupos
+    if collisions: #Se ocorrer a colisão
+        #print(collisions)
+        #print(collisions.keys)
+        #print(collisions.values)
+        #print(type(collisions.values))
+        #Os prints acima mostram que cada alienigena é um item em uma lista, por isto que multiplicamos o numero abaixo para caso
+        # de alienigenas que explodem junto
+        for aliens in collisions.values(): 
+            stats.score += ai_settings.alien_points * len(aliens) #Adiciono o numero de pontos de settings no score do jogo em game_stats
+            sb.prep_score() #Chamo o metodo para renderizar o valor de pontos na tela 
+            check_high_score(stats, sb) #Atualiza os valores de pontuacao maxima do jogo
     if len(aliens) == 0: #Valido se não há mais aliens no grupo
         bullets.empty() #com o metodo empty() que é da função Group de Sprites, esvaziamos o numero de tiros
+        ai_settings.increase_speed() #Aumento a velocidade do jogo
         create_fleet(ai_settings, screen, ship, aliens) #E então recriamos a frota com a função de criar frota
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -128,7 +142,7 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
         #print(stats.ships_left)
     check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
 
-def  check_fleet_edges(ai_settings, aliens):
+def check_fleet_edges(ai_settings, aliens):
     """Responde se algum alien atingiu as bordas da tela"""
     for alien in aliens.sprites():
         if alien.check_edges(): #Se ela me retornar verdadeiro, aí mudo a direção das naves no modulo settings
@@ -161,3 +175,9 @@ def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
         if alien.rect.bottom >= screen_rect.bottom:
             ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
             break
+
+def check_high_score(stats, sb): #Imaportante chamar esta funcao sempre que um alien for atingido
+    """Verifica se há uma pontuacao maxima"""
+    if stats.score > stats.high_score: #Valido se atingi a pontuacao maxima do jogo
+        stats.high_score = stats.score
+        sb.prep_high_score() #Uso o SB para atualizar a imagem da pontuação maxima
