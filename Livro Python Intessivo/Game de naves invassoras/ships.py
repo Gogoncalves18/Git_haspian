@@ -1,7 +1,9 @@
 import pygame
-class Ship():
+from pygame.sprite import Sprite 
+class Ship(Sprite):
     """Classe para criação de espacionaveis espaciais e define sua posicao inicial"""
     def __init__(self, ai_settings, screen):
+        super(Ship, self).__init__()
         self.ai_settings = ai_settings
         self.screen = screen
         self.image = pygame.image.load('/home/gog/Documentos/Python/Git_haspian/Livro Python Intessivo/Game de naves invassoras/imagens/my_ship.png') #Metodo de pygame para carregar imagens, tem que cuidar, o pygame trabalha melhor com .bmp
