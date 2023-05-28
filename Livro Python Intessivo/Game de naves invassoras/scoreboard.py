@@ -1,4 +1,6 @@
 import pygame.font
+from pygame.sprite import Group
+from ships import Ship
 class Scoreboard():
     """Classe para mostrar infos sobre a pontuacao"""
     def __init__(self, ai_settings, screen, stats):
@@ -12,6 +14,8 @@ class Scoreboard():
         self.font = pygame.font.SysFont(None, 48)
         self.prep_score() #Mostra a pontuacao atual
         self.prep_high_score() #Mostra a pontuacao total que ja foi atingida no game
+        self.prep_level() #Mostra o level do jogo
+        self.prep_ships()
 
     def prep_score(self):
         """Transforma a pontuacao em uma imagem redenrizada"""
@@ -29,6 +33,9 @@ class Scoreboard():
         """Metodo para exibir a imagem renderizada"""
         self.screen.blit(self.score_image, self.score_rect) #Desenho a imgame do score no local especificado em score_rect
         self.screen.blit(self.high_score_image, self.high_score_rect) # Desenha a imagem da pontacao maxima na tela
+        self.screen.blit(self.level_image, self.level_rect) #Desenho o level na tela
+        self.ships.draw(self.screen) #O metodo Draw de Group desenho todas as naves que estão dentro de Group
+                                    #lembro que cada nave vou gravada dentro de Group em um posicao X e Y diferente
 
     def prep_high_score(self):
         """Transforma a pontuacao maxima em uma imagem renderizada"""
@@ -39,3 +46,22 @@ class Scoreboard():
         self.high_score_rect.centerx = self.screen_rect.centerx #Alinho a imagem do score com o centro da tela
         self.high_score_rect.top = self.score_rect.top #Alinho o Y da nova imagem com o Y da pontuação que já está funcionando
 
+    def prep_level(self):
+        """Transforma o level em imagem"""
+        self.level_image = self.font.render(str(self.stats.level), True, self.text_color, self.ai_settings.bg_color)
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.right = self.score_rect.right
+        self.level_rect.top = self.score_rect.bottom + 10
+
+    def prep_ships(self):
+        """Mostra qunatas espacionaves restam"""
+        self.ships = Group() #Gurpo vazio para adicionar espacionaves que vou mostrar na tela de vidas
+        for ship_number in range(self.stats.ships_left): #Rodo um laco lendo cada elemento na propriedade de game_functions que me 
+                                                        #dis quantas naves eu tenhopara jogar
+            ship = Ship(self.ai_settings, self.screen) #Aqui eu herdo as funcoes de Ship
+            ship.rect.x = 10 + ship_number * ship.rect.width #para cada laço em naves que representam vidas eu defino um ship a 10
+                                                                #da borda e mais um valor que é seu numero de interação + a largura 
+                                                                #Assim elas serao desenhadas uma ao lado da outra 
+            ship.rect.y = 10 #Distancio a nave da borda da tela na parte superior
+            self.ships.add(ship) #Armazano a nave dentro do Group para desenhar ela na tela posteriormente atraves de Show_score desta classe
+                                    #Tambem será chamada em game_functions para ser desenhada
