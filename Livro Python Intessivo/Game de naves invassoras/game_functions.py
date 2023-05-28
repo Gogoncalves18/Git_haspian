@@ -3,7 +3,7 @@ from bullet import Bullet
 from alien import Alien
 from time import sleep
 #Aqui eu crio o objeto projetil na tela
-def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets):
+def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets):
     """Responde a eventos provinientes do teclado"""
     for event in pygame.event.get(): #Este laço pega todos eventos que vem do teclado do sistema quando o usuario joga, assim criamos condicionais com os eventos que estamos lendo
         if event.type == pygame.QUIT:
@@ -14,9 +14,9 @@ def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets)
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN: #Captura o evento do mouse
             mouse_x, mouse_y = pygame.mouse.get_pos() #Metodo para pegar a posicao do click do mouse
-            check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y) #Chama funcao para passar os parametros do clique
+            check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y) #Chama funcao para passar os parametros do clique
 
-def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y):
+def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y):
     """Inicia um novo jogo quando o jogador cliclar em play"""
     button_click = play_button.rect.collidepoint(mouse_x, mouse_y)#Rect do botao é a area desenhada no modulo botao, a funcao verificar se verdadeiro ou falso se 
     #a coordenada x,y está dentro desta area 
@@ -25,6 +25,10 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
         pygame.mouse.set_visible(False)
         stats.reset_stats() #Reseta o numero de vidas em game_stats
         stats.game_active = True #Ai digo ao programa, rode!
+        sb.prep_score() #Reinicia a imagem do score
+        sb.prep_high_score() #Reinicia a imagem da pontuacao maxima
+        sb.prep_level() #Apresenta o level do jogo
+        sb.prep_ships() #Apresenta o numero de vidas desenhando naves na tela
         aliens.empty() #Esvazia o grupo de aliens no codigo principal
         bullets.empty() #Esvazia o grupo de tiros disparados no codigo principal
         create_fleet(ai_settings, screen, ship, aliens) #Cria nova frota
@@ -89,6 +93,8 @@ def check_bullet_collision(ai_settings, screen, stats, sb, ship, aliens, bullets
     if len(aliens) == 0: #Valido se não há mais aliens no grupo
         bullets.empty() #com o metodo empty() que é da função Group de Sprites, esvaziamos o numero de tiros
         ai_settings.increase_speed() #Aumento a velocidade do jogo
+        stats.level += 1
+        sb.prep_level()
         create_fleet(ai_settings, screen, ship, aliens) #E então recriamos a frota com a função de criar frota
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -133,14 +139,14 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     #na função create_fleet que chama a função create_alien
     aliens.add(alien) #adiciono o objeto que sua posição no grupo Aliens.
     
-def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
+def update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets):
     """Verifica se os aliens estão na borda e então atualiza"""
     check_fleet_edges(ai_settings, aliens) #Chamo a função para me dizer se estou com algum alien na borda
     aliens.update() #atualizo as imagens dos aliens na tela
     if pygame.sprite.spritecollideany(ship, aliens):
-        ship_hit(ai_settings, stats , screen, ship, aliens, bullets)
+        ship_hit(ai_settings, stats , screen, sb, ship, aliens, bullets)
         #print(stats.ships_left)
-    check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
+    check_aliens_bottom(ai_settings, stats, screen, sb, ship, aliens, bullets)
 
 def check_fleet_edges(ai_settings, aliens):
     """Responde se algum alien atingiu as bordas da tela"""
@@ -155,10 +161,11 @@ def change_fleet_direction(ai_settings, aliens):
         alien.rect.y += ai_settings.fleet_drop_speed
     ai_settings.fleet_direction *= -1
 
-def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
     """Responde ao fato quando a espaçonave colide com um alienigena"""
     if stats.ships_left > 0: #Valido se há vida disponivel para o jogo
         stats.ships_left -= 1 #Diminuimos o numero de vida do modulo game_stats que influencia no modulo settings
+        sb.prep_ships() #Atualiza a qtd de vidas na tela
         aliens.empty() #Esvazia o grupo de aliens
         bullets.empty() #esvazia o grupo de tiros
         create_fleet(ai_settings, screen, ship, aliens) #Cria nova frota de aliens 
@@ -168,12 +175,12 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         stats.game_active = False
         pygame.mouse.set_visible(True)
 
-def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
+def check_aliens_bottom(ai_settings, stats, screen, sb, ship, aliens, bullets):
     """Verifica se o alien chegou a parte inferior da tela"""
     screen_rect = screen.get_rect() #Pego a dimensao da tela
     for alien in aliens.sprites():
         if alien.rect.bottom >= screen_rect.bottom:
-            ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+            ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets)
             break
 
 def check_high_score(stats, sb): #Imaportante chamar esta funcao sempre que um alien for atingido
