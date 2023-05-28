@@ -11,4 +11,5 @@ class GameStats():
         """Inicializa os dados estatisticos que podem mudar ao longo do jogo"""
         self.ships_left = self.ai_settings.ship_limit #numero de vidas no jogo
         self.score = 0
+        self.level = 1 #Nivel do jogo
     
