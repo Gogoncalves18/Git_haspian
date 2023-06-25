@@ -1,0 +1,9 @@
+#.KV precisa ter o mesmo nome que o app que esta sendo construido no main
+<Tarefas>:
+    BoxLayout:
+        id: box #O id possibilitará chamar as propriedades deste widget dentro do main ou entre widgets
+        orientation: 'vertical'
+        size_hint_y: None #Esta propriedade desliga o recurso de definição de tamanho em Y
+        height: self.minimum_height #Para o boxlayout ir aumentando a altura conforme vou inserindo
+                                    #infos nele, 2 widgets de 200 de heigth irá transformar meu box
+                                    #em 400 de heigth, esta é um propriedade de height, por isto do self
