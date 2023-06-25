@@ -1,12 +1,28 @@
 #.KV precisa ter o mesmo nome que o app que esta sendo construido no main
 <Tarefas>:
-    BoxLayout:
-        id: box #O id possibilitará chamar as propriedades deste widget dentro do main ou entre widgets
-        orientation: 'vertical'
-        size_hint_y: None #Esta propriedade desliga o recurso de definição de tamanho em Y
-        height: self.minimum_height #Para o boxlayout ir aumentando a altura conforme vou inserindo
-                                    #infos nele, 2 widgets de 200 de heigth irá transformar meu box
-                                    #em 400 de heigth, esta é um propriedade de height, por isto do self
+    orientation: 'vertical' # Orientacao para posicionar a tela das tarefas 
+                #com a entrada de texto, necessario desligar controle de altura
+                #para nao ocupar metade da tela
+    ScrollView: #Recurso para fazer a rolagem dentro do "id: box"
+        BoxLayout:
+            id: box #O id possibilitará chamar as propriedades deste widget dentro do main ou entre widgets
+            orientation: 'vertical'
+            size_hint_y: None #Esta propriedade desliga o recurso de definição de tamanho em Y
+            height: self.minimum_height #Para o boxlayout ir aumentando a altura conforme vou inserindo
+                                        #infos nele, 2 widgets de 200 de heigth irá transformar meu box
+                                        #em 400 de heigth, esta é um propriedade de height, por isto do self
+
+    BoxLayout: #Aqui coloco um novo widget para inserir texto nas tarefas
+        size_hint_y: None
+        height: 40
+        TextInput: # "TextInput" recebe entrada de texto
+            id: text_in # Identificacao da tela de entrada
+        Button:
+            text: '+'
+            size_hint_x: None
+            width: 30
+            on_release: root.addinfo() # Funcao de main.py que acessa a class
+                        #Tarefa atraves do "root."
 
 <Tarefa>: #Classe fornecida pela main
     size_hint_y: None #Desligamos o tamanho em Y para não ficar tudo sobreposto
@@ -18,7 +34,7 @@
         text: 'X' #Defino um tamanho de botao, sem nada de definicao de tam
                     #anho, ele ocupara metade da tela em x
         size_hint_x: None
-        width: 20
+        width: 30
         on_release: app.root.ids.box.remove_widget(root) # Recurso "on_release" monitora o soltar do botao, atraves dele
                     #disparo as açoes. Como queremos que ele remova a tarefa, neste 
                     #momento de remocao preciso apontar para o "id: box" que é quem
