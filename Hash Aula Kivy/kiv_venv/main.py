@@ -1,3 +1,4 @@
+# AULA - https://youtu.be/WmiKgFBIqkE
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
@@ -10,10 +11,15 @@ class Tarefas(ScrollView): #Criacao de tarefas na tela, adicionei o scroll para 
         #os **kwargs é para receber parametros extras 
         super().__init__(**kwargs) #preciso herdar o init senao ele sobrescrevera  init do boxlayout
         for tarefa in tarefas: #Rodo a lista que recebo
-            self.ids.box.add_widget(Label(text = tarefa, font_size = 20, size_hint_y = None, height = 80)) #Uso o box layout para inserir os
+            self.ids.box.add_widget(Tarefa(text = tarefa)) #Uso o boxlayout para inserir os
             #widgets no layout. Neste caso, o 'ids' define que chamarei um widget do .kv e o 'box' é o widget
-            #ao qual vou adicionar o widget 'label'. Dentro do label se não desligar o 'size_hint', os widgets ficará um em cima do outro.
-            # Como desliguei o hint do boxlayout no .kv, é necessário desligarmos aqui no label e determinar uma altura, aqui de 200 pixel.            
+            #ao qual vou adicionar o widget atraves da funcao tarefa. Dentro do da funcao entregarei o texto tarefa do loop
+
+class Tarefa(BoxLayout): # Esta funcao eu preciso configurar no .kv como <Tarefa>
+    def __init__(self, text = '', **kwargs): #Inicializo a funçao e dou um text vazio para ela receber o texto do "box.add_widget"
+        super().__init__(**kwargs)
+        self.ids.label_task.text = text # Aqui pego o texto enviado pela funcao Tarefas e insiro um a um
+                                        #em label_task no .kv  
 
 class AppMain(App):
     def build(self):

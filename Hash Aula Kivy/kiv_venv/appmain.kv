@@ -7,3 +7,26 @@
         height: self.minimum_height #Para o boxlayout ir aumentando a altura conforme vou inserindo
                                     #infos nele, 2 widgets de 200 de heigth irá transformar meu box
                                     #em 400 de heigth, esta é um propriedade de height, por isto do self
+
+<Tarefa>: #Classe fornecida pela main
+    size_hint_y: None #Desligamos o tamanho em Y para não ficar tudo sobreposto
+    height: 60 #Distribuicao das infos e do botao em alturas de 60 pixel
+    Label:
+        id: label_task #Aqui recebo o texto da classe Tarefa do main.py
+        font_size: 30 #Definicao do tamanho do texto
+    Button:
+        text: 'X' #Defino um tamanho de botao, sem nada de definicao de tam
+                    #anho, ele ocupara metade da tela em x
+        size_hint_x: None
+        width: 20
+        on_release: app.root.ids.box.remove_widget(root) # Recurso "on_release" monitora o soltar do botao, atraves dele
+                    #disparo as açoes. Como queremos que ele remova a tarefa, neste 
+                    #momento de remocao preciso apontar para o "id: box" que é quem
+                    #recebe as tarefas pela "class Tarefas" de main.py
+            # O root é o widget pai que estou, isto é, o "<Tarefa>", entao para 
+            #acessar o "id: box", precisamos acessar "app.root" que apontará para
+            #o Widget pai que é a "class Tarefas", assim consigo chegar em ids.box
+            #e usar o comando "remove_widget()" para remover a tarefa que é um objeto
+            #que ao passar o paramentro "root" dentro do remove, para remover o widget
+            #<Tarefa> todo.
+                
