@@ -1,12 +1,43 @@
 #.KV precisa ter o mesmo nome que o app que esta sendo construido no main
 <GerenciadorTela>: #Como meu gerenciador tela ira comandar tudo, ele é a 
                 #primeira classe que devo chamar no .KV
-    Screen: # Chamo uma tela Screen que não tem classe mas é uma classe do kivy
-        Button: # Adiciono um botao que me levará a outra tela
-            text: 'Ver Tarefas'
-            on_release: root.current = 'tarefas' # "on_release" é um callback para
-                        #chamar algo, o "root" apontara para o meu "GerenciadorTela"
-                        #e ".current = " aponto para o nome da tela que quero ir
+    Menu: # Chamo uma tela Menu que é classe mas é uma classe do kivy
+        BoxLayout:
+            orientation: 'vertical'
+            padding: [20,10,20,50] # Espaco entre os 4 lados do boxlayout, posso usar os 
+                    #valores assim tambem '20,20,10,10'
+            spacing: '10dp' # Separacao entre widgets
+            
+            Image: # Comando para carregar imagem, ela é um widget
+                source: 'logo.png' # Determina o local da imagem, se tiver em uma 
+                        #sub-pasta dento da pasta main.py e .kv, é só colocar 
+                        #sub-pasta/logo.png
+                size_hint_y: None #definir o tamanho da imagem
+                height: '200dp' # Se ela for pequena ela aumentará somente até
+                                #seu tamanho original
+                allow_stretch: True # Este recurso permite esticar a imagem, mesmo
+                            #que destorça
+                #pos_hint: {center_y:0.5}
+
+            Button:
+                text: 'Assistente'
+                size_hint_y: None
+                height: '50dp'
+
+            Button: # Adiciono um botao que me levará a outra tela
+                text: 'Ver Tarefas'
+                size_hint_y: None
+                height: '50dp'
+                on_release: root.current = 'tarefas' # "on_release" é um callback para
+                            #chamar algo, o "root" apontara para o meu "GerenciadorTela"
+                            #e ".current = " aponto para o nome da tela que quero ir
+            
+            Button:
+                text: 'Sair'
+                size_hint_y: None
+                height: '50dp'
+                on_release: app.stop() # Este comando fecha o app
+
     Tarefas: #Aqui chamo a sequencia de telas que meu gerenciador irá
             #trabalhar
 

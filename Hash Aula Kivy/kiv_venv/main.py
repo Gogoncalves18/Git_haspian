@@ -8,6 +8,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen #Preciso importar ambos
 class GerenciadorTela(ScreenManager):
     pass
 
+class Menu(Screen):
+    pass
+
 class Tarefas(Screen): # Neste caso deixo de usar o boxlayout e uso o Screen para se
     #gerenciado pelo ScreenManager com um tela
     def __init__(self, tarefas = [], **kwargs): #funcao para receber infos 'tarefas' que sera uma lista
