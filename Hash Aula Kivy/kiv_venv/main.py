@@ -2,10 +2,15 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
+from kivy.uix.screenmanager import ScreenManager, Screen #Preciso importar ambos,
+        #um é o gerenciador e o outro é a tela
 
-class Tarefas(BoxLayout): # Adicionado o "Boxlayout" no lugar de "scrollview" pois 
-    #no scroll nao é possivel colocar mais que um "boxlayout"
-    def __init__(self, tarefas, **kwargs): #funcao para receber infos 'tarefas' que sera uma lista
+class GerenciadorTela(ScreenManager):
+    pass
+
+class Tarefas(Screen): # Neste caso deixo de usar o boxlayout e uso o Screen para se
+    #gerenciado pelo ScreenManager com um tela
+    def __init__(self, tarefas = [], **kwargs): #funcao para receber infos 'tarefas' que sera uma lista
         #os **kwargs é para receber parametros extras 
         super().__init__(**kwargs) #preciso herdar o init senao ele sobrescrevera  init do boxlayout
         for tarefa in tarefas: #Rodo a lista que recebo
@@ -33,8 +38,11 @@ class Tarefa(BoxLayout): # Esta funcao eu preciso configurar no .kv como <Tarefa
 class AppMain(App):
     def build(self):
         Window.size = [300,560] #Travo o tamanho da tela para parece um celular
-        return Tarefas(['cafe', 'futebol', 'almoco', 'filme', 'namorar', 'pipoca', 'carinho dog', 'beijinho na nega', 'cheirinho', 'mais beijinho']) 
-            #Aqui estou passando um parametro extra para entregar para a classe Tarefas que #kwargs
-            #Podemos ver que ele sobrescrevera o .KV
+        return GerenciadorTela() #Deixei de usara a classe Tarefas e passo a carregar
+                #no construtor o Gerenciador de telas
     
 AppMain().run()
+
+#Tarefas(['cafe', 'futebol', 'almoco', 'filme', 'namorar', 'pipoca', 'carinho dog', 'beijinho na nega', 'cheirinho', 'mais beijinho']) 
+            #Aqui estou passando um parametro extra para entregar para a classe Tarefas que #kwargs
+            #Podemos ver que ele sobrescrevera o .KV
