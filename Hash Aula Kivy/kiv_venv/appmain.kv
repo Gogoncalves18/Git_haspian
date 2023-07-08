@@ -1,55 +1,74 @@
 #.KV precisa ter o mesmo nome que o app que esta sendo construido no main
 <GerenciadorTela>: #Como meu gerenciador tela ira comandar tudo, ele é a 
                 #primeira classe que devo chamar no .KV
-    Menu: # Chamo uma tela Menu que é classe mas é uma classe do kivy
-        BoxLayout:
-            orientation: 'vertical'
-            padding: [20,10,20,50] # Espaco entre os 4 lados do boxlayout, posso usar os 
-                    #valores assim tambem '20,20,10,10'
-            spacing: '10dp' # Separacao entre widgets
-            
-            Image: # Comando para carregar imagem, ela é um widget
-                source: 'logo.png' # Determina o local da imagem, se tiver em uma 
-                        #sub-pasta dento da pasta main.py e .kv, é só colocar 
-                        #sub-pasta/logo.png
-                size_hint_y: None #definir o tamanho da imagem
-                height: '200dp' # Se ela for pequena ela aumentará somente até
-                                #seu tamanho original
-                allow_stretch: True # Este recurso permite esticar a imagem, mesmo
-                            #que destorça
-                #pos_hint: {center_y:0.5}
+    Menu:
+        name: 'menu'
+    Tarefas: #Como tarefas é uma screen, esta funcao não possui IDS como 
+            #o box layout, ela usa "name" que é o mesmo que ID
+        name: 'tarefas'
 
-            Button:
-                text: 'Assistente'
-                size_hint_y: None
-                height: '50dp'
 
-            Button: # Adiciono um botao que me levará a outra tela
-                text: 'Ver Tarefas'
-                size_hint_y: None
-                height: '50dp'
-                on_release: root.current = 'tarefas' # "on_release" é um callback para
-                            #chamar algo, o "root" apontara para o meu "GerenciadorTela"
-                            #e ".current = " aponto para o nome da tela que quero ir
-            
-            Button:
-                text: 'Sair'
-                size_hint_y: None
-                height: '50dp'
-                on_release: app.stop() # Este comando fecha o app
+<Menu>: # Chamo uma tela Menu que é classe mas é uma classe do kivy
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20,10,20,50] # Espaco entre os 4 lados do boxlayout, posso usar os 
+                #valores assim tambem '20,20,10,10'
+        spacing: '10dp' # Separacao entre widgets
+        
+        Image: # Comando para carregar imagem, ela é um widget
+            source: 'logo.png' # Determina o local da imagem, se tiver em uma 
+                    #sub-pasta dento da pasta main.py e .kv, é só colocar 
+                    #sub-pasta/logo.png
+            size_hint_y: None #definir o tamanho da imagem
+            height: '200dp' # Se ela for pequena ela aumentará somente até
+                            #seu tamanho original
+            allow_stretch: True # Este recurso permite esticar a imagem, mesmo
+                        #que destorça
+            #pos_hint: None
+            #pos_hint: {'center_y':0.5}
 
-    Tarefas: #Aqui chamo a sequencia de telas que meu gerenciador irá
-            #trabalhar
+        Button:
+            text: 'Assistente'
+            size_hint_y: None
+            height: '50dp'
+
+        Button: # Adiciono um botao que me levará a outra tela
+            text: 'Ver Tarefas'
+            size_hint_y: None
+            height: '50dp'
+            on_release: app.root.current = 'tarefas' # "on_release" é um callback para
+                        #chamar algo, o "app.root" apontara para o meu "GerenciadorTela"
+                        #e ".current = " aponto para o nome da tela que quero ir
+        
+        Button:
+            text: 'Sair'
+            size_hint_y: None
+            height: '50dp'
+            on_release: app.stop() # Este comando fecha o app
+
 
 <Tarefas>: #Como uso um gerenciador acima, não preciso endentar
-    name: 'tarefas' #Como tarefas é uma screen, esta funcao não possui IDS como 
-                    #o box layout, ela usa "name" que é o mesmo que ID
     BoxLayout: #Como adicionei um gerenciador de telas acima do tarefas, o Tarefas
                 #deixou de ser um boxlayout, portanto adicionei um novo boxlayout 
                 #e endentei tudo dentro dele para continuar usando o recurso
         orientation: 'vertical' # Orientacao para posicionar a tela das tarefas 
                     #com a entrada de texto, necessario desligar controle de altura
                     #para nao ocupar metade da tela
+        ActionBar: # 'ActionBar' é um widget para colocar itens na barra superior
+                    #de um app, estes itens entram na 'actionview'
+            ActionView: # Para receber os itens da actionbar
+                ActionPrevious: # Botao para voltar para o menu anterior
+                    title: 'Tarefas/Voltar' # Nome do botao de volta
+                    on_release: app.root.current = 'menu' # Ao apertar o botao 
+                                #'Tarefas/Voltar', 'app.root' irá me levar para 
+                                #o 'gerenciadorTela' e dele com '.current =' eu
+                                #aponto para a tela 'Menu' que é filha
+                ActionButton: # É um tipo de button do 'ActionButton'
+                    text: 'Menu'
+                ActionSeparator: # Cria uma barra separadora entre os botoes
+                ActionButton: 
+                    text: 'Sair'
+                    on_release: app.stop()
         ScrollView: #Recurso para fazer a rolagem dentro do "id: box"
             BoxLayout:
                 id: box #O id possibilitará chamar as propriedades deste widget dentro do main ou entre widgets
