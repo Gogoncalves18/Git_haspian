@@ -4,6 +4,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen #Preciso importar ambos,
         #um é o gerenciador e o outro é a tela
+from kivy.uix.behaviors.button import ButtonBehavior # Para desenhar botao Person2
+from kivy.uix.label import Label # Para desenhar botao Person2
+from kivy.graphics import Ellipse, Rectangle, Color # Para desenhar botao Person2
+
 
 class GerenciadorTela(ScreenManager):
     pass
@@ -11,6 +15,33 @@ class GerenciadorTela(ScreenManager):
 class Menu(Screen):
     pass
 
+class BotaoPerson2(Label, ButtonBehavior): #Herdo classes igual .kv
+    def __init__(self, **kwargs): # Preciso iniciar a classe para produzir botao
+        super(BotaoPerson2, self).__init__(**kwargs) # Preciso rodar o super para nao
+            #sobre escrever a classe de label e buttonbehavior
+        self.atualizar() # Chamo a atualizacao
+
+        # Ate aqui o novo botao nao sai na posicao certa, por isto precisaremos redesenhar
+        #ele antes de chamar, como uma funcao de 'atualizar' posicao e tamanho
+
+    def on_pos(self, *args): # Funcao do kivy que é disparada sempre alguma posicao muda
+        self.atualizar()
+
+    def on_size(self, *args): # Funcao do kivy que é disparada sempre algum tamanho muda
+        self.atualizar()
+
+    def atualizar(self, *args): # Criado funcao para atualizar a todo momento
+        self.canvas.before.clear() # Para apagar rastros do redesenho o canvas    
+        with self.canvas.before: # A maneira de buscar o funcao canvas é com 'With'
+            Color(rgba=(0.28,0.4,0.69,1))
+            Ellipse(size=(self.height, self.height),
+                    pos=(self.pos))
+            Ellipse(size=(self.height, self.height),
+                    pos=(self.x + self.width - self.height, self.y))
+            Rectangle(size=(self.width - self.height, self.height),
+                      pos=(self.x + (self.height/2.0), self.y)) #aqui temos que usar
+                        #2.0 pq no python2 que o kivy usa, 1/2 ele devolve 0
+        
 class Tarefas(Screen): # Neste caso deixo de usar o boxlayout e uso o Screen para se
     #gerenciado pelo ScreenManager com um tela
     def __init__(self, tarefas = [], **kwargs): #funcao para receber infos 'tarefas' que sera uma lista
