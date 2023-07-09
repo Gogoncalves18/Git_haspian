@@ -14,7 +14,7 @@
         spacing: '10dp' # Separacao entre widgets
         canvas:
             Color:
-                rgba:0,0,0.5,1 
+                rgba:54/255,80/255,137/255,1 
             Rectangle:
                 size:self.size
                 pos:self.pos  
@@ -40,12 +40,12 @@
             #pos_hint: None, None
             #pos_hint: {"center_x":0.5,"center_y":0.5}
 
-        Button:
+        BotaoPerson:
             text: 'Assistente'
             size_hint_y: None
             height: '50dp'
 
-        Button: # Adiciono um botao que me levará a outra tela
+        BotaoPerson: # Adiciono um botao que me levará a outra tela
             text: 'Ver Tarefas'
             size_hint_y: None
             height: '50dp'
@@ -57,6 +57,7 @@
             text: 'Sair'
             size_hint_y: None
             height: '50dp'
+            background_color: 0.28,0.4,0.69,1
             on_release: app.stop() # Este comando fecha o app
 
 
@@ -102,6 +103,34 @@
                 width: 30
                 on_release: root.addinfo() # Funcao de main.py que acessa a class
                             #Tarefa atraves do "root."
+
+<BotaoPerson@ButtonBehavior+Label>: #Criacao de uma classe de botao dentro do .kv, neste 
+    #caso o primeiro nome antes do @ é o nome da classe nova, após o @, o .KV entende
+    #como as classes que vamos  herdar para nossa classe BotaoPerson. 'ButtonBehavior' é
+    #uma classe que lê apenas os eventos de um botao. 'Label' é outra classe herdada para
+    #aceitar um texto, podemos herdar quantas classes quiser adicionando o sinal '+'
+    canvas.before:
+        Color:
+            rgba:0.28,0.4,0.69,1
+        Ellipse:
+            pos:self.pos
+            size: self.height, self.height
+        Ellipse:
+            pos:self.x + self.width - self.height, self.y
+            size:self.height, self.height
+        Rectangle:
+            pos:self.x + (self.height/2), self.y
+            size:self.width - self.height, self.height
+        # Neste caso, o uso da propriedade 'Ellipse' é para desenhar uma circulo, como
+        #vamos usar ela dentro do botao "Assistente" na classe 'Menu' para mostrar o
+        #como reaproveitar o canvas, para não ter que criar varios canvas. Como lá dentro
+        #do 'Menu' eu tenho um botao com altura definida, no 'size' da 'Ellipse' eu uso
+        #o self.height tanto para a altura e largura, assim teremos um circulo ao inves 
+        #de uma elipse
+        # Para desenhar um botao com borda redonda, foi necessário desenhar dois circulos 
+        #com elipse e um retangulo, todas as medidas foi utilizado o self. do widget que
+        #estamos desenhando
+    
 
 <Tarefa>: #Classe fornecida pela main
     size_hint_y: None #Desligamos o tamanho em Y para não ficar tudo sobreposto
