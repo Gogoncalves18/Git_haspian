@@ -1,4 +1,3 @@
-#.KV precisa ter o mesmo nome que o app que esta sendo construido no main
 <GerenciadorTela>: #Como meu gerenciador tela ira comandar tudo, ele é a 
                 #primeira classe que devo chamar no .KV
     Menu:
@@ -7,13 +6,27 @@
             #o box layout, ela usa "name" que é o mesmo que ID
         name: 'tarefas'
 
-
 <Menu>: # Chamo uma tela Menu que é classe mas é uma classe do kivy
     BoxLayout:
         orientation: 'vertical'
         padding: [20,10,20,50] # Espaco entre os 4 lados do boxlayout, posso usar os 
                 #valores assim tambem '20,20,10,10'
         spacing: '10dp' # Separacao entre widgets
+        canvas:
+            Color:
+                rgba:0,0,0.5,1 
+            Rectangle:
+                size:self.size
+                pos:self.pos  
+        #^Aqui é o segredo, podemos dar o tamanho atraves '50,100'
+        #ou podemos dizer que ele tera o tamanho do widget atraves do 'self.'
+        #pos: self.pos # Mesma coisa que o tamanho, definimos uma posicao x,y ou
+        #self. para assumir a posicao do widget. O Canvas não esta aceitando 
+        #comentarios dentro dele. Lembrando que este canvas é do widget boxlayout
+        #Outra coisa importante é que posso carregar uma imagem no canvas dentro
+        #do 'Rectangle', usando a propriedade 'source:caminho da imagem'. Mas neste
+        #caso é necessário alterar o 'rgba' tudo para 1 pois ele funciona como um filtro
+        #para os pixels
         
         Image: # Comando para carregar imagem, ela é um widget
             source: 'logo.png' # Determina o local da imagem, se tiver em uma 
@@ -24,8 +37,8 @@
                             #seu tamanho original
             allow_stretch: True # Este recurso permite esticar a imagem, mesmo
                         #que destorça
-            #pos_hint: None
-            #pos_hint: {'center_y':0.5}
+            #pos_hint: None, None
+            #pos_hint: {"center_x":0.5,"center_y":0.5}
 
         Button:
             text: 'Assistente'
