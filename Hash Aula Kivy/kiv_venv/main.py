@@ -41,6 +41,11 @@ class BotaoPerson2(Label, ButtonBehavior): #Herdo classes igual .kv
             Rectangle(size=(self.width - self.height, self.height),
                       pos=(self.x + (self.height/2.0), self.y)) #aqui temos que usar
                         #2.0 pq no python2 que o kivy usa, 1/2 ele devolve 0
+
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch):
+            self.on_release
+        return super().on_touch_down(touch)
         
 class Tarefas(Screen): # Neste caso deixo de usar o boxlayout e uso o Screen para se
     #gerenciado pelo ScreenManager com um tela
