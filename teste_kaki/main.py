@@ -1,33 +1,60 @@
-#Arquivo para fazer as importacoes e  configuração dos caminhos
-import os #Para trazer o endereço dos arquivos
-from kaki.app import App #Para fazer o hot reload
-from kivy.core.window import Window #Para definir o tamanho de janela do kivy
-from kivymd.app import MDApp #Necessário para funcionar o Kaki
-from kivy.factory import Factory #Para ter acesso a classe que contem todas bibliotecas do kivy
+from kivy.app import App
+from kivy.core.window import Window
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.behaviors.button import ButtonBehavior
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.graphics import Ellipse, Rectangle, Color
+from kivy.config import Config 
+      
+Config.set('graphics', 'resizable', False)
 
-class MDLive(App,MDApp): #Classe para herdar as classes kivy e MDKivy e construir os direcionamentos
+class tela_manag(BoxLayout):
+    pass
 
-    KV_FILES = [
-        os.path.join(os.getcwd(), 'lay_tela.kv')
-    ]
-    # Aqui listamos os caminhos dos .KV que construi o layout das telas, para cada tela criada com o seu kv, 
-    #preciso apontar nesta lista de endereço
+class btn(ButtonBehavior, Label): # classe para construir um botao ao qual uso apenas 
+                    #o a classe ButtonBehavior para assumir comportamentos apenas e 
+                    #a classe label, assim posso trabalhar o .kv com estes recursos
+    def __init__(self, **kwargs):
+        super(btn, self).__init__(**kwargs)
+        self.atualizar() # Chamo a funcao para atualizar/desenhar o btn sempre que a classe é construida
 
-    CLASSES = {
-        "Tela": "screen_ui"
-    }
-    # Aqui aponto as classes necessárias, estas classes herdarão do Kivy as classes bases e apontarao para a estrutura .KV
-    # Cada tela poderá ter sua classe sendo chamada, neste caso "Tela" é a funcao que está dentro do arquivo "screen_ui.py"
-    #que constroi uma classe herdada do kivy e que conversará com o "lay_tela.kv"
+    def on_pos(self, *args): # Funcao do kivy que é disparada sempre alguma posicao muda
+        self.atualizar() # Redesenho o btn, para acertar posicao
 
-    AUTORELOADER_PATHS = [
-        (os.getcwd(), {"recursive":True})
-    ]
-    # Defino o padrao do autoreloader, ao qual defino o caminho como recurvivo
+    def on_size(self, *args): # Funcao do kivy que é disparada sempre algum tamanho muda
+        self.atualizar() # Redesenho o btn, para acertar posicao
 
-    def build_app(self): #Funcao contrutora da tela do app
-        Window.size = [350, 560] #Definicao do tamanho da tela, para ter proporcionalidade com o celular
-        return Factory.Tela() #Aqui defino o retorno do contrutor o acesso a biblioteca que contem todas
-                                #classes do kivy e sobre ela chamo a classe Tela() que me devolve as instrucoes construidas
+    def atualizar(self, *args, **kwargs): # Criado funcao para desenhar o btn
+        self.canvas.before.clear() # Para apagar rastros do redesenho do canvas em mseg que acontece   
+        with self.canvas.before: # A maneira de buscar o funcao canvas é com 'With' e o uso do before é para ele ser 
+                        #desenhado antes de qq coisa para ficar por baixo do label que usei no .kv
+            Color(rgba=(0.28,0.4,0.69,1))
+            # Os self abaixo são para assumir o tamanho que o próprio boxlayout reserva para ele no .kv, assim
+            #fica mais facil posicionarmos e ajustarmos o tamanho
+            Ellipse(
+                    size=(50, 50),
+                    pos=(self.x+50, self.center_y-25)                 
+                    )
+            Ellipse(
+                    size=(50, 50),
+                    pos=(self.width-75, self.center_y-25)
+                    )
+            Rectangle(
+                size=(self.width-125,50),
+                pos=(self.x+75, self.center_y-25)
+                      )               
+    def on_touch_down(self, touch): # Esta é uma funcao reservada do kivy, ele pega todos os eventos de toque na tela 
+        #toda. Usei ela pq não consegui usar o on_press somente dentro do desenho do canvas. O touch como atributo me
+        #entrega dois atributos em lista, spos e pos, dentro deles eu tenho o x e y do toque. Usei a condição abaixo 
+        #para prosseguir somente se o toque for dentro do tamanho do canvas desenhado, dentro de suas coordenadas x,y
+        if touch.pos[0] >50 and touch.pos[0] < self.width-75:
+            if touch.pos[1] > self.center_y-25 and touch.pos[1] < self.center_y+25:
+                print(touch.pos[0]) 
+ 
+class AppM(App):
+    def build(self):
+        Window.size = [300,560]
+        return tela_manag()
     
-MDLive().run() #Chamo a casse toda e deixo rodando
+AppM().run()

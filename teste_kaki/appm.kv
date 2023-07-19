@@ -1,0 +1,43 @@
+<tela_manag>:
+    orientation: 'vertical'
+    # background_color: 1,1,0,1
+    # canvas:
+    #     Color:
+    #         rgba:1,0,0,1
+    #     Rectangle:
+    #         size:self.size
+    #         pos:self.pos  
+
+    Button:
+        text: 'bt2'
+        size_hint_y: None
+        size_hint_x: None
+        width: '100dp'
+        height: '100dp'
+        background_color: 0.28,0.4,0.69,1
+        on_press: print("BTN_2") #Executa o print quando acionado
+        pos_hint: {"center_x":.5} #Centraliza em x apenas pq é um box
+                #Layout ao qual um botao fica sobre o outro na orientacao
+                #vertical
+
+    btn: # Aqui chamo uma classe especial de botao construida por python 
+        text: 'Este é o texto para vc'
+        pos_hint: {'center_x': 0.5}
+        
+    Button:
+        text: 'Sair'
+        size_hint_y: None
+        height: '50dp'
+        background_color: 0.28,0.4,0.69,1
+        on_press: print("AQUI")
+
+        
+
+
+        # btn:
+        #     text: 'BTN ESP'
+        #     size_hint_x: None
+        #     size_hint_y: None
+        #     width: '50dp'
+        #     height: '50dp'
+        #     halign: 'middle'
