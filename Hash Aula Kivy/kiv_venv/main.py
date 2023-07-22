@@ -15,37 +15,52 @@ class GerenciadorTela(ScreenManager):
 class Menu(Screen):
     pass
 
-class BotaoPerson2(Label, ButtonBehavior): #Herdo classes igual .kv
-    def __init__(self, **kwargs): # Preciso iniciar a classe para produzir botao
-        super(BotaoPerson2, self).__init__(**kwargs) # Preciso rodar o super para nao
-            #sobre escrever a classe de label e buttonbehavior
-        self.atualizar() # Chamo a atualizacao
-
-        # Ate aqui o novo botao nao sai na posicao certa, por isto precisaremos redesenhar
-        #ele antes de chamar, como uma funcao de 'atualizar' posicao e tamanho
+class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao qual uso apenas 
+                    #o a classe ButtonBehavior para assumir comportamentos apenas e 
+                    #a classe label, assim posso trabalhar o .kv com estes recursos
+    def __init__(self, **kwargs):
+        super(BotaoPerson2, self).__init__(**kwargs)
+        self.atualizar_btn_person() # Chamo a funcao para atualizar_btn_person/desenhar o btn sempre que a classe é construida
 
     def on_pos(self, *args): # Funcao do kivy que é disparada sempre alguma posicao muda
-        self.atualizar()
+        self.atualizar_btn_person() # Redesenho o btn, para acertar posicao
 
     def on_size(self, *args): # Funcao do kivy que é disparada sempre algum tamanho muda
-        self.atualizar()
+        self.atualizar_btn_person() # Redesenho o btn, para acertar posicao
 
-    def atualizar(self, *args): # Criado funcao para atualizar a todo momento
-        self.canvas.before.clear() # Para apagar rastros do redesenho o canvas    
-        with self.canvas.before: # A maneira de buscar o funcao canvas é com 'With'
+    def atualizar_btn_person(self, *args, **kwargs): # Criado funcao para desenhar o btn
+        self.canvas.before.clear() # Para apagar rastros do redesenho do canvas em mseg que acontece   
+        with self.canvas.before: # A maneira de buscar o funcao canvas é com 'With' e o uso do before é para ele ser 
+                        #desenhado antes de qq coisa para ficar por baixo do label que usei no .kv
             Color(rgba=(0.28,0.4,0.69,1))
-            Ellipse(size=(self.height, self.height),
-                    pos=(self.pos))
-            Ellipse(size=(self.height, self.height),
-                    pos=(self.x + self.width - self.height, self.y))
-            Rectangle(size=(self.width - self.height, self.height),
-                      pos=(self.x + (self.height/2.0), self.y)) #aqui temos que usar
-                        #2.0 pq no python2 que o kivy usa, 1/2 ele devolve 0
-
-    def on_touch_down(self, touch):
-        if self.collide_point(*touch):
-            self.on_release
-        return super().on_touch_down(touch)
+            # Os self abaixo são para assumir o tamanho que o próprio boxlayout reserva para ele no .kv, assim
+            #fica mais facil posicionarmos e ajustarmos o tamanho
+            Ellipse(
+                    size=(50, 50),
+                    pos=(self.x, self.center_y-25)                 
+                    )
+            Ellipse(
+                    size=(50, 50),
+                    pos=(self.width-35, self.center_y-25)
+                    )
+            Rectangle(
+                size=(self.width-50,50),
+                pos=(self.x+25, self.center_y-25)
+                      )               
+    def on_touch_down(self, touch): # Esta é uma funcao reservada do kivy, ele pega todos os eventos de toque na tela 
+        #toda. Usei ela pq não consegui usar o on_press somente dentro do desenho do canvas. O touch como atributo me
+        #entrega dois atributos em lista, spos e pos, dentro deles eu tenho o x e y do toque. Usei a condição abaixo 
+        #para prosseguir somente se o toque for dentro do tamanho do canvas desenhado, dentro de suas coordenadas x,y
+        if touch.pos[0] > self.x and touch.pos[0] < self.width+5:
+            if touch.pos[1] > self.center_y-25 and touch.pos[1] < self.center_y+25:
+                #print(touch.pos[0])
+                App.get_running_app().root.current = 'tarefas'
+                    #Neste eu consigo navegar entre os niveis de objeto. APP.get_running_app() eu recebo o objeto
+                    # que é meu APP principal, visto no print_1 abaixo. Adicionando a linha o .ROOT, eu chego no objeto filho
+                    # o meu GERENCIADOR_TELA que é a classe onde tudo começa e então posso usar os recursos de trocar de tela 
+                print(f'PRINT_1 : {App.get_running_app()}')
+                print(f'PRINT_2 : {App.get_running_app().root}')
+                return True
         
 class Tarefas(Screen): # Neste caso deixo de usar o boxlayout e uso o Screen para se
     #gerenciado pelo ScreenManager com um tela
