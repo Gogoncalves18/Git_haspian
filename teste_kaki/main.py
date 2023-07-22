@@ -17,15 +17,15 @@ class btn(ButtonBehavior, Label): # classe para construir um botao ao qual uso a
                     #a classe label, assim posso trabalhar o .kv com estes recursos
     def __init__(self, **kwargs):
         super(btn, self).__init__(**kwargs)
-        self.atualizar() # Chamo a funcao para atualizar/desenhar o btn sempre que a classe é construida
+        self.atualizar_btn_person() # Chamo a funcao para atualizar_btn_person/desenhar o btn sempre que a classe é construida
 
     def on_pos(self, *args): # Funcao do kivy que é disparada sempre alguma posicao muda
-        self.atualizar() # Redesenho o btn, para acertar posicao
+        self.atualizar_btn_person() # Redesenho o btn, para acertar posicao
 
     def on_size(self, *args): # Funcao do kivy que é disparada sempre algum tamanho muda
-        self.atualizar() # Redesenho o btn, para acertar posicao
+        self.atualizar_btn_person() # Redesenho o btn, para acertar posicao
 
-    def atualizar(self, *args, **kwargs): # Criado funcao para desenhar o btn
+    def atualizar_btn_person(self, *args, **kwargs): # Criado funcao para desenhar o btn
         self.canvas.before.clear() # Para apagar rastros do redesenho do canvas em mseg que acontece   
         with self.canvas.before: # A maneira de buscar o funcao canvas é com 'With' e o uso do before é para ele ser 
                         #desenhado antes de qq coisa para ficar por baixo do label que usei no .kv
@@ -38,10 +38,10 @@ class btn(ButtonBehavior, Label): # classe para construir um botao ao qual uso a
                     )
             Ellipse(
                     size=(50, 50),
-                    pos=(self.width-75, self.center_y-25)
+                    pos=(self.width-100, self.center_y-25)
                     )
             Rectangle(
-                size=(self.width-125,50),
+                size=(self.width-150,50),
                 pos=(self.x+75, self.center_y-25)
                       )               
     def on_touch_down(self, touch): # Esta é uma funcao reservada do kivy, ele pega todos os eventos de toque na tela 
