@@ -7,6 +7,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen #Preciso importar ambos
 from kivy.uix.behaviors.button import ButtonBehavior # Para desenhar botao Person2
 from kivy.uix.label import Label # Para desenhar botao Person2
 from kivy.graphics import Ellipse, Rectangle, Color # Para desenhar botao Person2
+from kivy.properties import ListProperty
 
 
 class GerenciadorTela(ScreenManager):
@@ -18,6 +19,11 @@ class Menu(Screen):
 class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao qual uso apenas 
                     #o a classe ButtonBehavior para assumir comportamentos apenas e 
                     #a classe label, assim posso trabalhar o .kv com estes recursos
+    cor = ListProperty([0.28,0.4,0.69,1])
+            #crio uma cor definida atraves do atributo de cor que é uma propriedade 
+            #armazenada em uma listproperty que preciso importar no kivy
+    cor_pressed = ListProperty([0.1,0.1,0.1,1])
+
     def __init__(self, **kwargs):
         super(BotaoPerson2, self).__init__(**kwargs)
         self.atualizar_btn_person() # Chamo a funcao para atualizar_btn_person/desenhar o btn sempre que a classe é construida
@@ -28,11 +34,22 @@ class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao q
     def on_size(self, *args): # Funcao do kivy que é disparada sempre algum tamanho muda
         self.atualizar_btn_person() # Redesenho o btn, para acertar posicao
 
+    # def on_press(self, *args):
+    #     self.cor = self.cor_pressed
+        #esta funcao reservada do kivy só funcionara para classe BUTTON do kivy
+
+    def on_cor(self, *args):
+        #Esta funcao reservada do kivy traz todos os eventos de mundanca que 
+        #ocorrem em uma LIST PROPERTY de COR do kivy
+        self.atualizar_btn_person()    
+            #como houve uma mudanca nas cores, eu executo a funcao de atualizar o canvas,
+            #isto fara o canvas ler novamente a propriedade cor
+
     def atualizar_btn_person(self, *args, **kwargs): # Criado funcao para desenhar o btn
         self.canvas.before.clear() # Para apagar rastros do redesenho do canvas em mseg que acontece   
         with self.canvas.before: # A maneira de buscar o funcao canvas é com 'With' e o uso do before é para ele ser 
                         #desenhado antes de qq coisa para ficar por baixo do label que usei no .kv
-            Color(rgba=(0.28,0.4,0.69,1))
+            Color(rgba=self.cor)
             # Os self abaixo são para assumir o tamanho que o próprio boxlayout reserva para ele no .kv, assim
             #fica mais facil posicionarmos e ajustarmos o tamanho
             Ellipse(
@@ -54,12 +71,31 @@ class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao q
         if touch.pos[0] > self.x and touch.pos[0] < self.width+5:
             if touch.pos[1] > self.center_y-25 and touch.pos[1] < self.center_y+25:
                 #print(touch.pos[0])
-                App.get_running_app().root.current = 'tarefas'
+                #App.get_running_app().root.current = 'tarefas'
                     #Neste eu consigo navegar entre os niveis de objeto. APP.get_running_app() eu recebo o objeto
                     # que é meu APP principal, visto no print_1 abaixo. Adicionando a linha o .ROOT, eu chego no objeto filho
                     # o meu GERENCIADOR_TELA que é a classe onde tudo começa e então posso usar os recursos de trocar de tela 
                 print(f'PRINT_1 : {App.get_running_app()}')
                 print(f'PRINT_2 : {App.get_running_app().root}')
+                self.cor, self.cor_pressed = self.cor_pressed, self.cor 
+                #Faco o cor de botao apertado ser assumida quando apertor o BTN Personalizado, com esta tecnica eu troco os 
+                #valores de uma cor pela outro e torno a troca novamente na funcao ON_TOUCH_UP
+                return True
+            
+    def on_touch_up(self, touch): # Esta é uma funcao reservada do kivy, ele pega todos os eventos de toque na tela 
+        #toda. Usei ela pq não consegui usar o on_press somente dentro do desenho do canvas. O touch como atributo me
+        #entrega dois atributos em lista, spos e pos, dentro deles eu tenho o x e y do toque. Usei a condição abaixo 
+        #para prosseguir somente se o toque for dentro do tamanho do canvas desenhado, dentro de suas coordenadas x,y
+        if touch.pos[0] > self.x and touch.pos[0] < self.width+5:
+            if touch.pos[1] > self.center_y-25 and touch.pos[1] < self.center_y+25:
+                App.get_running_app().root.current = 'tarefas'
+                    #Neste eu consigo navegar entre os niveis de objeto. APP.get_running_app() eu recebo o objeto
+                    # que é meu APP principal, visto no print_1 abaixo. Adicionando a linha o .ROOT, eu chego no objeto filho
+                    # o meu GERENCIADOR_TELA que é a classe onde tudo começa e então posso usar os recursos de trocar de tela
+                print(touch.pos[0])               
+                print(f'PRINT_1 : {App.get_running_app()}')
+                print(f'PRINT_2 : {App.get_running_app().root}')
+                self.cor, self.cor_pressed = self.cor_pressed, self.cor #Faco o cor de botao apertado ser assumida quando apertor o BTN Personalizado
                 return True
         
 class Tarefas(Screen): # Neste caso deixo de usar o boxlayout e uso o Screen para se
