@@ -1,0 +1,42 @@
+h1 {color: mediumslateblue; font-style: oblique; font-size: 50px; text-align: center;}
+    /*tudo que for H1 é formatado para esta formatacao*/
+p {word-spacing: 15px; font-style: normal; font-size: 15px;}
+    /*Aqui formatei o P dos textos*/
+.texto_atencao{background-color: aquamarine;}
+    /*Tudo que for com .NOME é pq estou chamando uma classe neste caso a classe
+    dentro do texto que a coloquei, neste caso o H2 está sendo chamado*/
+#realcar{font-size: 20px; font-style: italic; justify-content: center;color: blueviolet; background-color: aliceblue;}
+    /*#REALCAR é para chamar um ID, veja que criei uma classe para TEXTO_ATENCAO
+    e a formatei mas no H2 AGORA È COM VC eu adicionei uma ID, entao o CSS deixara
+    a instrucao de formatacao anterior e assumira a ultima formacao e mais especifica 
+    que é o ID*/
+p.ass{color: brown}   
+    /*Veja que eu ainda posso usar P.ASS para dar uma nova formatada, especificando
+    que quero a formatacao de P com classe ASS da assinatura, para este caso ele respeita
+    a especificacao*/
+body{
+    background-image: url(fundo_page.jpeg);
+        /*para carregar imagens de fundo, há outras opções além do URL*/
+    background-repeat: no-repeat;
+        /*Para imagem não ficar se repetindo, há outras opçoes de repeticao*/
+    background-size: contain;
+        /*aqui eu controlo o tamanho da imagem na tela, CONTAIN apenas ajusta ela para adequar na largura
+        ou comprimento, aquele que estourar primeiro*/
+    background-attachment: fixed;
+        /*ATTACHMENT é para travar a imagem quando rolo a página*/
+    }
+    /*BODY tamem é uma referencia para o CSS ao qual posso mexer*/
+
+span{font-style: oblique; font-size: 40px;}
+
+.area_especial{
+    margin: 10px;
+    padding: 20px;
+    border: 4px solid burlywood;
+        /*desenho em volta do conteudo*/
+    width: fit-content;
+        /*FIT-CONTENT é a adaptacao do conteudo dentro da area*/
+                }
+
+
+

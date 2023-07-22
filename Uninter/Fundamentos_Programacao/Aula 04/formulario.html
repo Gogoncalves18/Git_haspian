@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="br"> <!--defino qual lingua o tradutor deve considerar-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site da Pizza</title> <!--nome do site que aparece na aba-->
+</head>
+<body>
+    <h1>Pedido de Pizza</h1>
+    <form action="teste.jsp" method="get">
+    <!--FORM é o comando para abrir um formulario, GET é o metodo do formulario que pega os dados de input
+    ACTION é a ação que o formulario deve fazer, enviar dados para o TESTE.JSP-->
+
+    Nome:       
+        <input type="text" name="nome" id="1">
+        <!--o comando INPUT já traz a estrutura de dados do input-->
+    <br>
+    EMAIL:
+        <input type="email" name="email" id="">
+        <!--o html já faz a validação se é um e-mail-->
+    <br>
+    Data da Entrega:
+        <input type="date" name="DataEntrega" id="">
+        <!--Ele já traz com o INPUT DATE a opção de calendário no código-->
+    <br>
+    Tamanho:    
+        <input type="radio" name="tamanho" value="P">Pequeno
+        <input type="radio" name="tamanho" value="M">Médio
+        <input type="radio" name="tamanho" value="G" checked>Grande
+        <!--INPUT RADIO é um marcador opcional em formato de bola. Importante: se o NAME dele for 
+        igual para todos, ele aceitará só uma marcação. O CHECKED é um atributo que mantem a pagina
+        marcada na opção quando carrega-->
+    <br>
+    Escolha seu Sabor:
+        <select name="Sabor" id="">
+            <!--SELECT é uma caixa de opções que abre as situações que devem estar descritas abaixo-->
+        <option>"Marguerita"</option>
+        <option>"Calabresa"</option>
+        <option>"Napolitano"</option>
+        <option>"4 Queijos"</option>
+        </select>
+    <br>
+    Adicionais:
+        <!--CHECKBOX eu posso adicionar várias box ao mesmo tempo, o valor sim é para validar posteriormente
+        de acordo com o nome que a check pertence-->
+        <input type="checkbox" name="borda" value="sim"> Borda
+        <input type="checkbox" name="mais recheio" value="sim"> + Recheio
+        <input type="checkbox" name="catupiry" value="sim"> Catupiry
+    <br>
+    Observações:
+            <textarea name="obs" id="" cols="30" rows="10"></textarea>
+            <!--TEXTAREA abre uma caixa de texto grande para entrada de textos diversos-->
+    <br>
+            <input type="submit" value="Enviar">
+            <!--btn de INPUT SUBMIT irá enviar os dados que estão preenchidos no formulario para o 
+            TESTE.JSP pq eu configurei a opção de ACTION=TESTE>JSP e configurei um METHOD=GET.
+            Este METHOD irá passar os dados através do próprio link de endereço e não encontrará o 
+            JSP. Já o METHOD=POST enviará os atributos mas não deixará os dados expostos no link-->
+
+    
+    </form>
+    
+</body>
+</html>
