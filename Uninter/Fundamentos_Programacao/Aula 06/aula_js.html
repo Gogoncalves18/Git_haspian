@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 06</title>
+</head>
+<body>
+    <p id="paraf_substituir">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem eaque unde animi vitae doloribus officia nisi, enim, tempora totam quae consequatur sapiente rerum omnis! Mollitia voluptas sequi nesciunt eius maiores.
+    </p>
+
+    <p id="tx"> Este texto é para importar pelo JS.</p>
+
+    <p id="paraf_substituir2">
+        OLHA AQUI, sit amet consectetur adipisicing elit. Aut, rerum!
+    </p>
+    
+    <button onclick="document.getElementById('paraf_substituir').innerHTML='Ola MUNDO'"> Troca de texto </button>
+        <!--
+            - Funcao BUTTON do html para deixar uma botao na pagina com nome TROCA DE TEXTO
+            - O botao possui um evento ONCLICK = "" que recebe uma instrucao que descrevo abaixo:
+            DOCUMENT. me retorna o documento que o botao esta inserido
+            - GETELEMENTBYID('') eu obtenho o que há dentro do paragrafo ao qual classifico com um ID,
+            nele passo o nome do ID que é PARAF_SUBSTITUIR
+            - INNERHTML='mensagem' injeta no lugar do texto que obtive, a mensagem nova quando o botao
+            é apertado
+        -->
+    
+    <!--a palavra SCRIPT invoca a linguagem JS para criar a logica que se parece com linguagem C
+        //Neste caso o CONSOLE.LOG() escreve na tela a mensagem -->
+    <script>
+        console.log("Ola mundo");      
+
+    </script>
+
+    <script src="aula_js.js"></script>
+        <!--Acima é a maneira que direciono o link de onde está meu código em JS-->
+
+</body>
+</html>

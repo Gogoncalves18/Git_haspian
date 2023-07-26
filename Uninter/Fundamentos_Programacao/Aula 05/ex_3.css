@@ -1,0 +1,21 @@
+.lista{
+    list-style: upper-latin;
+    width: fit-content;
+    background-color: aquamarine;
+}
+
+.lista li:nth-child(even){
+    background-color: blueviolet;
+}
+
+.lista li:nth-child(odd){
+    background-color: coral;
+}
+
+/*Neste caso o LIST-STYLE: UPPER_LATIN me apresenta os marcadores da lista de forma automatica
+em WIDTH: FIT_CONTENT eu adapto a largura do box com o tamanho do texto.
+Abaixo então eu tenho metaclasses para influenciar na lista, eu chamo a classe, e entao
+a metaclasse para LI: e o tipo da metaclasse que é NTH-CHILD() que é os filhos da lista.
+Dentro dos parenteses posso usar o numero da posicao da lista ou chamar todos os impar 
+ou par, atraves de EVEN ou ODD. Com isto posso aplicar opções dentro do item, assim
+como aplicar a metaclasse HOVER.*/

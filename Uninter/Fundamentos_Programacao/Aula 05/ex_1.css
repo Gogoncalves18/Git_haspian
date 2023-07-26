@@ -1,0 +1,39 @@
+.Box_{
+    border: 3px solid black;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+    /*estou trabalhando duas classe, uma BOX_ que é
+    comum entre os box e outra BOX1 e outros numeros
+    para colocar as particularidades. Usei POSITION: 
+    ABSOLUTE para determinar a posicao entre as margens */
+
+.Box1{
+    background-color: rgb(56, 20, 218);
+    position: absolute;
+    left: 8px;
+    top: 8px;
+}
+
+.Box2{
+    background-color: rgb(188, 35, 202);
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+.Box3{
+    background-color: rgb(51, 240, 76);
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+}
+
+.Box4{
+    background-color: rgb(226, 230, 26);
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+}

@@ -1,0 +1,23 @@
+.imagem{
+    background: url("fundo_page.jpeg") no-repeat;
+    width: 300px;
+    height: 300px;
+    display: block;
+    background-size: contain;
+}
+    /*DISPLAY: BLOCK faz com que o html que não contem 
+    conteudo algum, apresente a imagem na tela e 
+    BACKGROUND_SIZE: CONTAIN ajusta a imagem ao espaco
+    na box determinado*/
+.imagem:hover{
+    background-position: 0px 50px;
+}
+    /*:hover é uma metaclasse que possui comportamento
+    proprio, no caso dele, ele executa a instrução abaixo
+    quando posiciono o mouse em cima, neste caso, movimentara
+    para baixo a imagem*/
+
+.imagem:active{
+    background-position: 50px 50px;
+}
+    /*ACTIVE é uma metaclasse que responde ao clique*/
