@@ -1,0 +1,27 @@
+#igual, #res{
+    display: block;
+    width: 20%;
+    padding: 10px 15px;
+    border: 1;
+    background: yellow;
+    color: brown;
+    border-radius: 5px;
+    margin: 1px 1px;
+}
+
+.input[type='text'] {
+    width: 30%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid greenyellow;
+}
+
+/*classe PROBLEMA criada para injetar quando uma validacao de input é feita 
+no .JS*/
+.problema {
+    background: red;
+    color: azure;
+    padding: 5px;
+    margin: 5px;
+}
