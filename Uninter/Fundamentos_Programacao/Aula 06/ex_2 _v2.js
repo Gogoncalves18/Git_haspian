@@ -6,11 +6,8 @@ let btnSoma = document.querySelector('#soma');
 let btnSub = document.querySelector("#sub");
 let btnDivi = document.querySelector("#dividir");
 let btnMult = document.querySelector("#mult");
+let resp = document.querySelector("#res")
 
-let btn_soma = false
-let btn_sub = false
-let btn_mult = false
-let btn_divi = false
 
 v1.addEventListener("mouseout", consumir1);
 v2.addEventListener("mouseout", consumir2);
@@ -34,15 +31,41 @@ function act_btn(){
 
 function acao(evt){
     console.log("Meu operador é = "+evt.target.id);
-    if(evt.target.id === "soma")
+    if(evt.target.id === "soma"){
+        vlrF = parseInt(vlr1)+parseInt(vlr2);
+        resp.innerHTML = `${vlrF}`;
+        btnSoma.style.backgroundColor ="red"
+        setTimeout(() => {btnSoma.style.backgroundColor =""
+        }, 3000);
+        //console.log(`Acertei o + deu ${vlrF}`);
+    };
         
-        console.log("Acertei o +");
-    if(evt.target.id === "sub")
-        console.log("Acertei o -");
-    if(evt.target.id === "dividir")
-        console.log("Acertei o /");
-    if(evt.target.id === "mult")
-        console.log("Acertei o X");
+    if(evt.target.id === "sub"){
+        vlrF = parseInt(vlr1)-parseInt(vlr2);
+        resp.innerHTML = `${vlrF}`;
+        btnSub.style.backgroundColor ="red"
+        setTimeout(() => {btnSub.style.backgroundColor =""
+        }, 3000);
+        //console.log("Acertei o -");
+    };
+
+    if(evt.target.id === "dividir"){
+        vlrF = parseInt(vlr1)/parseInt(vlr2);
+        resp.innerHTML = `${vlrF}`;
+        btnDivi.style.backgroundColor ="red"
+        setTimeout(() => {btnDivi.style.backgroundColor =""
+        }, 3000);
+        //console.log("Acertei o /");
+    };
+
+    if(evt.target.id === "mult"){
+        vlrF = parseInt(vlr1)*parseInt(vlr2);
+        resp.innerHTML = `${vlrF}`;
+        btnMult.style.backgroundColor ="red"
+        setTimeout(() => {btnMult.style.backgroundColor =""
+        }, 3000);
+        //console.log("Acertei o X");
+    };
 };
 
 

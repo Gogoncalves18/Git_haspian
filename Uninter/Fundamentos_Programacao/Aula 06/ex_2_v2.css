@@ -10,3 +10,7 @@
 
 }
 
+button:disabled {
+    background-color: cyan
+  }
+

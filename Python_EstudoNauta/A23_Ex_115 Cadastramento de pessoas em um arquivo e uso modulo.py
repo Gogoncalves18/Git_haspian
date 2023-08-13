@@ -18,7 +18,7 @@ while True:
     print(f'{cores.texto("[ 3 ] ", 2)}{cores.texto("Encerrar Programa", 3)}')
     try:
         print()
-        opcao = int(input(cores.texto("Digite uma opção: ", 3))) #Peço para escolher uma das 3 opções acima
+        opcao = int(input(cores.texto("Digite uma opção: ", 3))) #Peço para escolher uma das 3 opções acim1a
     except ValueError:
         print(cores.texto("Você precisa digitar uma opção válida!", 1)) #Validação de dado, se digitar alguma coisa diferente 
     else: 
