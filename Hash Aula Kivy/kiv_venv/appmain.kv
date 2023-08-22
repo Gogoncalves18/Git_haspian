@@ -40,7 +40,7 @@
             #pos_hint: None, None
             #pos_hint: {"center_x":0.5,"center_y":0.5}
 
-        BotaoPerson:
+        BotaoPerson2:
             text: 'Assistente'
             size_hint_y: None
             height: '50dp'
@@ -59,7 +59,8 @@
             size_hint_y: None
             height: '50dp'
             background_color: 0.28,0.4,0.69,1
-            on_release: app.stop() # Este comando fecha o app
+            on_release: root.confirmacao() #Funcao dentro do .PY para sair
+                        #app.stop() # Este comando fecha o app
 
 
 <Tarefas>: #Como uso um gerenciador acima, não preciso endentar
@@ -123,7 +124,7 @@
             pos:self.x + (self.height/2), self.y
             size:self.width - self.height, self.height
         # Neste caso, o uso da propriedade 'Ellipse' é para desenhar uma circulo, como
-        #vamos usar ela dentro do botao "Assistente" na classe 'Menu' para mostrar o
+        #vamosbefore usar ela dentro do botao "Assistente" na classe 'Menu' para mostrar o
         #como reaproveitar o canvas, para não ter que criar varios canvas. Como lá dentro
         #do 'Menu' eu tenho um botao com altura definida, no 'size' da 'Ellipse' eu uso
         #o self.height tanto para a altura e largura, assim teremos um circulo ao inves 

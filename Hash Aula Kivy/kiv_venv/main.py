@@ -8,13 +8,46 @@ from kivy.uix.behaviors.button import ButtonBehavior # Para desenhar botao Perso
 from kivy.uix.label import Label # Para desenhar botao Person2
 from kivy.graphics import Ellipse, Rectangle, Color # Para desenhar botao Person2
 from kivy.properties import ListProperty
+from kivy.uix.popup import Popup
+from kivy.uix.image import Image
 
 
 class GerenciadorTela(ScreenManager):
     pass
 
 class Menu(Screen):
-    pass
+    def confirmacao(self, *args):
+        box = BoxLayout(orientation = 'vertical',
+                        padding = 0,
+                        spacing = 5,
+                        )
+                        # size_hint = (None, None),
+                        # size = (300, 150),
+
+        btns = BoxLayout(orientation = 'vertical',
+                        padding = 0,
+                        spacing = 5,                        
+                        )
+        # size_hint = (None, None),
+        #                 size = (self.width-30, 60),
+
+        sim = BotaoPerson2(text = 'SIM')
+        nao = BotaoPerson2(text = 'NÃO')
+
+        btns.add_widget(sim)
+        btns.add_widget(nao)
+
+        atencao = Image(source = 'img_atencao.png')
+
+        box.add_widget(atencao)
+        box.add_widget(btns)
+
+        pop = Popup(title = 'Deseja mesmo sair?', 
+                    content = box, 
+                    size_hint = (None, None),
+                    size = (self.width, self.height/3),                                        
+                    )
+        pop.open()
 
 class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao qual uso apenas 
                     #o a classe ButtonBehavior para assumir comportamentos apenas e 
@@ -53,17 +86,20 @@ class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao q
             # Os self abaixo são para assumir o tamanho que o próprio boxlayout reserva para ele no .kv, assim
             #fica mais facil posicionarmos e ajustarmos o tamanho
             Ellipse(
-                    size=(50, 50),
-                    pos=(self.x, self.center_y-25)                 
+                    size=(self.height, self.height),
+                    pos=(self.x, self.center_y-(self.height/2))                 
                     )
             Ellipse(
-                    size=(50, 50),
-                    pos=(self.width-35, self.center_y-25)
+                    size=(self.height, self.height),
+                    pos=(self.width-(self.height/2), self.center_y-(self.height/2))
                     )
             Rectangle(
-                size=(self.width-50,50),
-                pos=(self.x+25, self.center_y-25)
-                      )               
+                size=((self.width-self.height),self.height),
+                pos=(self.x+(self.height/2), self.center_y-(self.height/2))
+                      )
+            x = self.width
+            print(x)
+            
     def on_touch_down(self, touch): # Esta é uma funcao reservada do kivy, ele pega todos os eventos de toque na tela 
         #toda. Usei ela pq não consegui usar o on_press somente dentro do desenho do canvas. O touch como atributo me
         #entrega dois atributos em lista, spos e pos, dentro deles eu tenho o x e y do toque. Usei a condição abaixo 
@@ -77,10 +113,12 @@ class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao q
                     # o meu GERENCIADOR_TELA que é a classe onde tudo começa e então posso usar os recursos de trocar de tela 
                 print(f'PRINT_1 : {App.get_running_app()}')
                 print(f'PRINT_2 : {App.get_running_app().root}')
+                print(f'Olha aqui ======>>>>> {self.text}')
                 self.cor, self.cor_pressed = self.cor_pressed, self.cor 
                 #Faco o cor de botao apertado ser assumida quando apertor o BTN Personalizado, com esta tecnica eu troco os 
                 #valores de uma cor pela outro e torno a troca novamente na funcao ON_TOUCH_UP
                 return True
+        # print(dir(self)) # Apresenta todas subclasses do SELF
             
     def on_touch_up(self, touch): # Esta é uma funcao reservada do kivy, ele pega todos os eventos de toque na tela 
         #toda. Usei ela pq não consegui usar o on_press somente dentro do desenho do canvas. O touch como atributo me
@@ -88,15 +126,20 @@ class BotaoPerson2(ButtonBehavior, Label): # classe para construir um botao ao q
         #para prosseguir somente se o toque for dentro do tamanho do canvas desenhado, dentro de suas coordenadas x,y
         if touch.pos[0] > self.x and touch.pos[0] < self.width+5:
             if touch.pos[1] > self.center_y-25 and touch.pos[1] < self.center_y+25:
-                App.get_running_app().root.current = 'tarefas'
-                    #Neste eu consigo navegar entre os niveis de objeto. APP.get_running_app() eu recebo o objeto
-                    # que é meu APP principal, visto no print_1 abaixo. Adicionando a linha o .ROOT, eu chego no objeto filho
-                    # o meu GERENCIADOR_TELA que é a classe onde tudo começa e então posso usar os recursos de trocar de tela
-                print(touch.pos[0])               
-                print(f'PRINT_1 : {App.get_running_app()}')
-                print(f'PRINT_2 : {App.get_running_app().root}')
-                self.cor, self.cor_pressed = self.cor_pressed, self.cor #Faco o cor de botao apertado ser assumida quando apertor o BTN Personalizado
-                return True
+                if self.text == 'Ver Tarefas':
+                    App.get_running_app().root.current = 'tarefas'
+                        #Neste eu consigo navegar entre os niveis de objeto. APP.get_running_app() eu recebo o objeto
+                        # que é meu APP principal, visto no print_1 abaixo. Adicionando a linha o .ROOT, eu chego no objeto filho
+                        # o meu GERENCIADOR_TELA que é a classe onde tudo começa e então posso usar os recursos de trocar de tela
+                    print(touch.pos[0])               
+                    print(f'PRINT_1 : {App.get_running_app()}')
+                    print(f'PRINT_2 : {App.get_running_app().root}')
+                    self.cor, self.cor_pressed = self.cor_pressed, self.cor #Faco o cor de botao apertado ser assumida quando apertor o BTN Personalizado
+                    return True
+                elif self.text == 'Assistente':
+                    print('========>>> Apertei no Assistente Mane <<<=========')
+                    self.cor, self.cor_pressed = self.cor_pressed, self.cor 
+                    return True
         
 class Tarefas(Screen): # Neste caso deixo de usar o boxlayout e uso o Screen para se
     #gerenciado pelo ScreenManager com um tela
