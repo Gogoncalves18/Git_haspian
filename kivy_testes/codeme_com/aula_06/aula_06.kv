@@ -1,0 +1,50 @@
+#Nome da classe que irei controlar
+<Tela_grade> 
+    #Aqui devemos ter cuidado, a primeira palavra NOME
+    #é a propriedade que será levada para o arquivo PY
+    #já a segunda palavra é o ID do campo que bscarei no KV
+    nome: name
+    comida: food
+    cor: color
+
+    GridLayout: #primeiro gride com 1 coluna
+        cols: 1
+        #Aqui assumo o tamanho da minha tela para o widget
+        #se comentar a linha abaixo, ele ficará pequeno
+        size: root.width, root.height
+
+        GridLayout: #Coloco o segundo gride na dentro do primeiro
+            cols: 2
+
+            Label:
+                text: 'Name'
+
+            TextInput: 
+                multiline: False
+                id: name
+
+            Label:
+                text: 'Food'
+
+            TextInput: 
+                multiline: False
+                id: food
+
+            Label:
+                text: 'Cor'
+
+            TextInput: 
+                multiline: False
+                id: color
+
+        Button:
+            text: 'Submeter'
+            #Como estou no primeiro widget, preciso apontar para
+            #o ROOT que é o pai
+            on_release: root.apertei() 
+            
+
+                
+                
+
+        
