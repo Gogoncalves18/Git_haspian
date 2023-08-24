@@ -1,0 +1,55 @@
+#Maneira para importar uma biblioteca parecida com pyhton, porem no kv
+#: import utils kivy.utils
+<Tela_grade> 
+    nome: name
+    comida: food
+    cor: color
+
+    GridLayout: 
+        cols: 1
+        size: root.width, root.height
+
+        GridLayout: 
+            cols: 2
+
+            Label:
+                text: 'Name'
+
+            TextInput: 
+                multiline: False
+                id: name
+
+            Label:
+                text: 'Food'
+
+            TextInput: 
+                multiline: False
+                id: food
+
+            Label:
+                text: 'Cor'
+
+            TextInput: 
+                multiline: False
+                id: color
+                #forma de definir a cor pelo Hexadecimal
+                background_color: utils.get_color_from_hex('#eefa00')
+
+        Button:
+            text: 'Submeter'
+            on_release: root.apertei() 
+            # '''background_normal: '' irá passar para o kivy
+            # #que eu quero o verdadeiro tom de cor, isto é,
+            # quando não passo esta informacão, ele trará uma
+            # cor mais escura, pois mistura com o cinza
+            # '''
+            background_normal: ''
+            # Definicao para determinar a cor de fundo do 
+            # Button
+            background_color: (1,0,1,1)
+            
+
+                
+                
+
+        
