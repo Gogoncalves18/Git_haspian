@@ -22,6 +22,8 @@ elif sys.platform.startswith('linux'):
 comp_name = os.uname().nodename #Nome do computador que roda o app
 user_name = os.environ['LOGNAME'] #carrego de uma string em formato de dict, o nome do user logado
 user_local = os.environ['HOME'] #Endereco origem do user logado
+test = os.environ
+print(test)
 
 
 walk = Tempo('Leitura por Walk')
@@ -91,6 +93,7 @@ print(f'\nTAMANHO TOTAL DA TOTAL = {formata_tamanho(tam_total)}')
 
 print(f'\n=======================================================================================')
 while True:
+    #config_cmd.conf_existe
     cores.titulo('OPÇÔES DE TAREFAS', 2)
     print(f'{cores.texto("[ 1 ] ", 2)}{cores.texto("PROD SKA", 3)}')
     print(f'{cores.texto("[ 2 ] ", 2)}{cores.texto("CRAU SKA", 3)}')
