@@ -1,0 +1,43 @@
+<Button>
+    font_size: '20dp'
+    size_hint: (.2, .2)
+
+<Box> 
+    FloatLayout:
+        size: root.width, root.height
+
+        Button:
+            text:"Esq Alto"
+            #No FLOATLAYOUT a posicao do widget é definida entre chaves
+            #no seguinte padrão:
+            #{"x": que pode ser % , "y", "top", "bottom", "left", "right"}
+            pos_hint: {"x": 0, "top": 1} #Neste caso colado do lado esquerdo e colodo
+            #em cima, se colocasse "top": 0.5 ele ficaria no meio da tela
+
+        Button:
+            text: 'Dir Baixo'
+            #Aqui como meu widget ocupa 20% do espaço, se eu der um deslocamento em
+            #"x" de 80%, ele ficará colado do outro lado da tela na parte de baixo
+            pos_hint: {"x": 0.8, "bottom": 1} 
+
+        Button:
+            text: 'Esq Baixo'
+            pos_hint: {'x': 0}
+
+
+        Button:
+            text: 'Dir Alto'
+            #Neste caso como a contagem é sempre da esquerda para direita, aqui inverto 
+            #a referencia
+            pos_hint: {"right": 1, "top": 1}
+
+        Button:
+            text: 'Center'
+            #Neste caso para centralizar é necessário dar em relação a X e ao TOP
+            #o vlr 0.5 que representa a metade da tela, porém ele irá desenhar o 
+            #widget a apartir deste ponto, portanto preciso descontar metade dos 
+            #20% que adotei como largura e altura do BUTTON
+            pos_hint: {"x": (0.5-.1), "top": .5 + .1}
+
+
+
