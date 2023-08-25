@@ -1,0 +1,41 @@
+<Box> 
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: '2dp'
+        spacing: '4dp'
+
+        Label:
+            #ID serve para ser referenciado por funçoes dentro
+            #do KV e no python. Olhar a maneira como leio o ID
+            #na funcao ACEITAR(SELF) dentro do python
+            id: frase_label
+            text: 'Qual o seu nome?'
+            #Este é o tamanho da fonte
+            font_size: '30dp'
+            #aqui é o tamanho do texto de acordo com o tamanho do 
+            #espaço, sem ele não consigo definir centralização
+            text_size: self.size
+            size_hint: (1, .2)
+            #HALIGN define a posicao em x (left, center, right, justify)
+            halign: 'left'
+            #VALIGN define posicao em Y dentro do LABEL (left, center e right)
+            valign: 'center'
+
+        TextInput:
+            id: resp_input
+            multiline: False
+            size_hint: (1, 1)   
+        
+
+        Button:
+            text: 'Aceitar'
+            font_size: '30dp'
+            size_hint: (1, .2)
+            #chamo a funcao que pertence ao ROOT que é minha classe
+            #principal abaixo do APP
+            on_press: root.aceitar()   
+                
+            
+
+
