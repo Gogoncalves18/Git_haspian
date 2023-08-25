@@ -1,0 +1,51 @@
+<Box> 
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        spacing: '5dp'
+        padding: '15dp'
+
+        Label:
+            text: 'Nome'
+        TextInput:
+            multiline: False
+        Label:
+            text: 'Definição de Prato'
+        TextInput:
+            multiline: False
+        btn:
+            text: 'Submeter'
+        btn:
+            text: 'Limpar'
+
+#NEste caso eu crio uma classe que com @
+#Herda o Button e todas as configuracoes passam para o botoes que 
+#eu inseri acima
+<btn@Button>
+    font_size: '20dp'
+    bold: True
+    size_hint: (1, None)
+    height: '30dp'
+    background_normal: ''
+    background_color: (1,0,1,1)
+
+<Label>
+#Embora a classe LABEL deveria funcionar desta forma, ela está
+#influenciando na classe BTN que criei acima. Se eu colocar
+#estas informações dentro do LABEL, ai nao tem problema
+    font_size: '20dp'
+    italic: True
+    #PAra dar cor no LABEL, é necessário colocar canvas
+    canvas.before:
+        Color:
+            rgba: (0,1,0,0.5)
+        Rectangle: 
+            size: self.size
+            pos: self.pos
+    #cor da fonte
+    color: (1,1,0,1)
+    bold: True
+    #linha envolta da fonte
+    outline_color: (0,0,0,1)
+
+ 
