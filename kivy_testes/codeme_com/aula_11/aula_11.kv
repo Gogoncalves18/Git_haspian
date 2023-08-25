@@ -1,0 +1,65 @@
+<Box> 
+    #Se eu chamar o canvas aqui, na primeira classe, eu estou
+    #desenhando a tela por baixo e determinando uma cor. Neste
+    #caso podemos ver a difença do totalmente branco dela para
+    #o branco acinzentado do TEXTINPUT. Lembrando que eu posso fazer
+    #isto no windown dentro do .PY
+    # canvas.before:
+    #     Color:
+    #         rgba: (1,1,1,1)
+    #     Rectangle:
+    #         pos:self.pos
+    #         size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        spacing: '5dp'
+        padding: '15dp'
+
+        Label:
+        #Neste LABEL eu escrevi os paramentros dentro dele pq
+        #a classe que eu criei para escrever os paramentros 
+        #em um lugar somente na aula_09 estava influenciando
+        #nos paramentros do botao
+            text: 'Nome'
+            italic: True
+            color: (0,0,0,1)
+            size_hint: (1, None)
+            height: '40dp'
+            canvas.before:
+                Color:
+                    rgba: (0,0.5,1,1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        TextInput:
+            multiline: False
+        Label:
+            text: 'Definição de Prato'
+            italic: True
+            color: (0,0,0,1)
+            size_hint: (1, None)
+            height: '40dp'
+            canvas.before:
+                Color:
+                    rgba: (0,0.5,1,1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        TextInput:
+            multiline: False
+        btn:
+            text: 'Submeter'
+        btn:
+            text: 'Limpar'
+
+#NEste caso eu crio uma classe que com @
+#Herda o Button e todas as configuracoes passam para o botoes que 
+#eu inseri acima
+<btn@Button>
+    font_size: '20dp'
+    bold: True
+    size_hint: (1, None)
+    height: '30dp'
+    background_normal: ''
+    background_color: (1,0,1,1)
