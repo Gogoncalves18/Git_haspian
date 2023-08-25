@@ -1,0 +1,36 @@
+<Box> 
+    BoxLayout:
+        #define a orientação das caixas do boxlayout, por padrao
+        #ele é orizontal
+        orientation: 'vertical'
+        size: root.width, root.height
+        #Espaçamento entre os elementos
+        spacing: '5dp'
+        #Borda de espaçamento ao redor dos elementos para com a 
+        #janela
+        padding: '15dp'
+        #Para cada widget adicionado ao boxlayout, o kivy irá
+        #dividir em espaço iguais a nao ser que eu manipule 
+        #com o SIZE_HINT ou POS_HINT
+        Button:
+            text: 'Ola Dev'
+        Button:
+            text: 'Estudando sempre'
+            #Defino o tamanho automatico no X será desligado, mas
+            #o tamanho em Y continuará ocupando o espaço proporcionalmente
+            size_hint: (None, 1)
+            #Define o tamanho em X, para Y seria HEIGHT
+            width: '200dp'
+        Button:
+            text: 'Bye Mundo!'
+            #Aqui mantenho o tamanho automatico em x e Y,
+            #porém o X será metade da ocupação possível
+            size_hint: (0.5, 1)
+        Button:
+            text: 'Bora Gremiooo!'
+            #Tamanho em X e Y ocupará metade do espaço destinado por igual
+            size_hint: (0.5, 0.5)
+            #Defino a posicao do widget dentro do elemento que ele
+            #será colocado, neste caso, posição em X é sempre 
+            #centralizado no espaço endereçado
+            pos_hint: {'center_x': 0.5}
