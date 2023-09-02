@@ -1,0 +1,122 @@
+
+<Button>
+    font_size: '20dp'
+    size_hint: (.2, .2)
+
+
+<Box> 
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: '2dp'
+        spacing: '4dp'
+
+        TextInput:
+            id: tela_res
+            multiline: False
+            size_hint: (1, 0.15)
+            text: '0'
+            text_size: self.size
+            halign: 'right'
+            valign: 'center'
+            
+
+        
+        GridLayout:
+        #O Grid é preenchido linha a linha da esquerda para direita 
+        #de cima para baixo, seguindo a sequencia de add dos btns
+            cols: 4
+            rows: 5
+            spacing: '0dp'
+            padding: '0dp'
+
+            Button:
+                text: '/'
+                on_press: root.sinal_op('/')
+
+            Button:
+                id: ce
+                text: 'CE'
+
+            Button:
+            #Todos botoes possui id quando necessário
+                id: c
+                text: 'C'
+                on_press: root.clear()
+
+            Button:
+                #no TEXT utilizei o codigo para simbolo ASCII para
+                #para criar o simbolo "<<" para btn
+                text: u'\u00AB'
+                on_press: root.remover()
+
+            Button:
+                #Botoes numericos, o proprio acionamento do btn,
+                #passar para o .PY o valor para que possamos 
+                #executar o preenchimento do TEXTINPUT
+                text: '7'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(7)
+            
+            Button:
+                text: '8'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(8)
+            Button:
+                text: '9'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(9)
+            Button:
+                text: '*'
+                on_press: root.sinal_op('*')
+
+            Button:
+                text: '4'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(4)
+            Button:
+                text: '5'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(5)
+            Button:
+                text: '6'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(6)
+            Button:
+                text: '-'
+                on_press: root.sinal_op('-')
+            Button:
+                text: '1'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(1)
+            Button:
+                text: '2'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(2)
+            Button:
+                text: '3'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(3)
+            Button:
+                text: '+'
+                on_press: root.sinal_op('+')
+
+            Button:
+                text: '+/-'
+                on_press: root.troca_sinal()
+
+            Button:
+                text: '0'
+                background_color: (132/255, 132/255, 132/255, 1)
+                on_press: root.btn_act(0)
+            Button:
+                text: '.'
+                on_press: root.btn_act('.')
+
+            Button:
+                text: '='
+                on_press: root.btn_res()
+                
+            
+
+        
