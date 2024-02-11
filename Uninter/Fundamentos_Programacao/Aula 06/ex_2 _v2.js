@@ -37,7 +37,7 @@ function acao(evt){
         btnSoma.style.backgroundColor ="red"
         setTimeout(() => {btnSoma.style.backgroundColor =""
         }, 3000);
-        //console.log(`Acertei o + deu ${vlrF}`);
+        console.log(`Acertei o + deu ${vlrF}`);
     };
         
     if(evt.target.id === "sub"){
@@ -46,7 +46,7 @@ function acao(evt){
         btnSub.style.backgroundColor ="red"
         setTimeout(() => {btnSub.style.backgroundColor =""
         }, 3000);
-        //console.log("Acertei o -");
+        console.log("Acertei o -");
     };
 
     if(evt.target.id === "dividir"){
@@ -55,7 +55,7 @@ function acao(evt){
         btnDivi.style.backgroundColor ="red"
         setTimeout(() => {btnDivi.style.backgroundColor =""
         }, 3000);
-        //console.log("Acertei o /");
+        console.log("Acertei o /");
     };
 
     if(evt.target.id === "mult"){
@@ -64,7 +64,7 @@ function acao(evt){
         btnMult.style.backgroundColor ="red"
         setTimeout(() => {btnMult.style.backgroundColor =""
         }, 3000);
-        //console.log("Acertei o X");
+        console.log("Acertei o X");
     };
 };
 
