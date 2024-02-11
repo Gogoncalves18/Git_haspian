@@ -1,0 +1,15 @@
+certifi==2023.5.7
+charset-normalizer==3.1.0
+docutils==0.20.1
+ffpyplayer==4.5.0
+idna==3.4
+kaki==0.1.9
+Kivy==2.2.1
+Kivy-examples==2.2.1
+Kivy-Garden==0.1.5
+kivymd==1.1.1
+Pillow==9.5.0
+Pygments==2.15.1
+requests==2.31.0
+urllib3==2.0.3
+watchdog==3.0.0
