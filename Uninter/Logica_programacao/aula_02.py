@@ -11,3 +11,5 @@ print(s1 + '>' * 10 + s2)
 print(f'Vc está estudando {s2}')
 nome = input('Qual seu nome completo?')
 print(f'O nome dele é {nome}')
+n2 = 10 // 3
+print(n2)  # valor de 3 que cabe dentro de 10
