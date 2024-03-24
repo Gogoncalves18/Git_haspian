@@ -1,12 +1,12 @@
-#Pegar n entradas do usuario e montar uma lista de pares e outra de impar
-lst_num=[]
-lst_par=[]
-lst_impar=[]
+# Pegar n entradas do usuario e montar uma lista de pares e outra de impar
+lst_num = []
+lst_par = []
+lst_impar = []
 while True:
     lst_num.append(int(input('\nDigite um numero: ')))
-    sair=str(input('\nQuer continuar? [S] / [N]')).upper()[0]
+    sair = str(input('\nQuer continuar? [S] / [N]')).upper()[0]
     while sair not in 'SN':
-        sair=str(input('\nDIGITE APENAS [S] / [N]')).upper()[0]
+        sair = str(input('\nDIGITE APENAS [S] / [N]')).upper()[0]
     if sair == 'N':
         break
 print(f'\nLista digitada foi {lst_num}')

@@ -1,12 +1,13 @@
-'''Programa para validar exceções da entrada de um numero inteiro e um real'''
+'''Programa para validar exceções da entrada de um numero inteiro
+e um real'''
 from Modulos_Uteis import cores
 
 sair = False
 while sair is False:
     try:
         num_int = int(input('\nDigite um numero inteiro: '))
-    #except Exception as erro:
-        #print(f'O tipo de erro foi {erro.__class__}')
+    # except Exception as erro:
+        # print(f'O tipo de erro foi {erro.__class__}')
     except ValueError:
         cores.titulo('Você não digitou um numero inteiro', 1)
     except KeyboardInterrupt:
@@ -18,8 +19,8 @@ while sair is False:
 while sair is False:
     try:
         num_fl = int(input('\nDigite um numero real: '))
-    #except Exception as erro:
-        #print(f'O tipo de erro foi {erro.__class__}')
+    # except Exception as erro:
+        # print(f'O tipo de erro foi {erro.__class__}')
     except ValueError:
         cores.titulo('Você não digitou um numero inteiro', 1)
     except KeyboardInterrupt:

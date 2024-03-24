@@ -1,5 +1,5 @@
 def escreva(msg):
-    tam=int((len(msg))+4)
+    tam = int((len(msg))+4)
     print('='*tam)
     print(f'{msg:^{tam}}')
     print('='*tam)

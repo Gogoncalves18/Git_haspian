@@ -6,19 +6,23 @@ A segunda funcao vai somar todos os numeros pares sorteados da funcao anterior
 from random import randint
 
 lst_num = []
+
+
 def sorteio():
-    for c in range(1,6):
-        lst_num.append(randint(0,21))
+    for c in range(1, 6):
+        lst_num.append(randint(0, 21))
     print(f'\nOs numeros sorteados foram: {lst_num}')
 
+
 def somar():
-    soma=0
+    soma = 0
     for n in lst_num:
-        if n%2 == 0:
-            soma+=n
-    print(f'\nA soma dos numeros pares dentro da lista {lst_num} é : {soma}')
+        if n % 2 == 0:
+            soma += n
+    print(f'\nA soma dos numeros pares dentro da lista {lst_num} é : \
+{soma}')
 
 
-#PROGRAMA PRINCIPAL
+# PROGRAMA PRINCIPAL
 sorteio()
 somar()
