@@ -12,3 +12,7 @@ for i in ped:
         t = 2
     vlr_total += vlrs_prod[i['prod']][t]
 print(vlr_total)
+
+vlrs_prod = {'DIG': 1.10, 'ICO': 1, 'IBO': 0.40, 'FOT': 0.20}
+
+print(vlrs_prod['DIG'])
