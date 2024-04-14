@@ -113,7 +113,11 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
 
 def mov_pastas_arqs(cod_mercado, cod_interno, arq_cnc, ext_arq_cnc):
     '''Funcao para copiar e renomear novas pastas para outro
-    ambiente, aqui recebemos os dois códigos, mercado e interno'''
+    ambiente, aqui recebemos os 2 códigos, mercado e interno.
+    Alem dessas infos, recebemos o nome do arquivo e a extensao do
+    mesmo para manipularmos as informações dentro da função. Estas
+    infos vem do codigo principal.
+    '''
     print(f'ESTE CÓDIGO MERCADO TEM NA LISTA: {cod_mercado} \
 Referenciado com {cod_interno}')
     # Desempacotando em maquinas e pastas das maquinas para preservarmos
@@ -129,18 +133,36 @@ Referenciado com {cod_interno}')
             os.mkdir(new_path)
         else:
             os.mkdir(new_path)
+    ''' Conferencia se o codigo de mercado está dentro do nome do arquivo,
+    dentro desta pasta é tratado arquivos que ha codigo de mercado dentro
+    deles, se ha a letra "L" que significa lado a ser usinado. Posterior
+    a isto é avaliado o numero escrito depois do L para copia-lo para o
+    novo arquivo. Se ele possui varios "L", apenas geramos o codigo normal,
+    considerando que e um programa com todos os lados, se o nome nao bate com
+    nada, apenas gero o codigo interno com txt.
+    '''
+    # Condicional apenas para arquivos que tem codigo interno
     if cod_mercado in arq_cnc:
+        # Caminho completo do arquivo antigo
         path_new_file = os.path.join(new_path, arq)
+        # Caminho completo do arquivo novo
         arq_txt = new_path + separador + cod_interno + ".txt"
+        # Copia do arquivo original para nova pasta
         shutil.copy(old_path_arq, path_new_file)
+        # Variavel para pegar a posicao do "L"
         qtd_L = int(arq_cnc.count('L'))
+        # Tratamento para aquivos sem "L" no nome
         if qtd_L == 0:
             arq_txt = new_path + separador + cod_interno + ".txt"
             shutil.copy(old_path_arq, arq_txt)
+        # Tratamento para aqruivo com 1 "L" no nome
         elif qtd_L == 1:
             pos_L = int(arq_cnc.find('L') + 1)
-            arq_txt = new_path + separador + cod_interno + "_L" + arq_cnc[pos_L] + ".txt"
+            arq_txt = new_path + separador + cod_interno + "_L" + {
+                arq_cnc[pos_L]} + ".txt"
             shutil.copy(old_path_arq, arq_txt)
+    # Tratamento para arquivo que não batem com "L" ou codigo
+    # de mercado no nome do arquivo antigo
     else:
         path_new_file = os.path.join(new_path, arq)
         arq_txt = new_path + separador + cod_interno + ".txt"
@@ -174,7 +196,7 @@ for raiz, subpastas, arqs in os.walk(ponto_zero+separador):
         last_nivel_pasta = os.path.split(raiz)
 
         # Acionamento da função para tratar os nomes das pastas, dando
-        # o caminho até a ultima pasta que contem um arquivo
+        # o caminho até a ultima pasta que contem um arquivo. E enviamos
+        # os nomes dos arquivos e extensao em separado para facilitar a
+        # manipulacao dentro da funcao.
         tratamento_nomes_pasta(last_nivel_pasta, old_name_arq_sem_ext, ext_arq)
-
-        
