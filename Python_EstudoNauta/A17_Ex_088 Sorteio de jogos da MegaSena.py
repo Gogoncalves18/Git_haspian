@@ -15,3 +15,4 @@ for j in range(0, qtd_jogos):  # N jogos que o usuario quer que
     # para lista final
     sorteio_temp.clear()  # limpeza da lista temporaria
     print(f'\nSoteio N_{j+1} => {sorted(sorteio_final[j])}')
+    print(sorteio_final)
