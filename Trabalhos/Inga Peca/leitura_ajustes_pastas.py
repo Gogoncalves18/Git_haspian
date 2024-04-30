@@ -44,7 +44,7 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
     saneamento_word_n1 = expressao.sub(' ', word).split(' ')
     # print(f'SANEAMENTO DE: {saneamento_word_n1}')
     # Dados recebidos em DICT de cada pasta lida
-    dados_minerados.clear() 
+    dados_minerados.clear()
     dados_minerados['nome_pasta'] = caminho[-1]
     # Informacoes encontradas apos tratamento
     dados_encontrados = []
@@ -97,7 +97,8 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
                                             lista_cod.index(item)-1].strip(),
                                         arq_cnc, ext_arq_cnc)
                         # Info inserida no dict de cada pasta
-                        dados_minerados['item_interno'] = lista_cod[lista_cod.index(item)-1]
+                        dados_minerados['item_interno'] = lista_cod[
+                            lista_cod.index(item)-1]
                     # Nova validacao para remover um caracter final
                     # para procurar novo match com o csv
                     elif str(cod_ficticio[:-1]) == str(item):
@@ -107,17 +108,19 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
                         # {((lista_cod.index(item))+3)/2} com COD_i \
                         # {lista_cod[lista_cod.index(item)-1]}')
                         mov_pastas_arqs(item,
-                                        lista_cod[lista_cod.index(item)-1].strip(),
+                                        lista_cod[
+                                            lista_cod.index(item)-1].strip(),
                                         arq_cnc, ext_arq_cnc)
 
                         # Info inserida no dict de cada pasta
-                        dados_minerados['item_interno'] = lista_cod[lista_cod.index(item)-1]
-                   
+                        dados_minerados['item_interno'] = lista_cod[
+                            lista_cod.index(item)-1]
+
                     else:
-                        
                         # Info inserida no dict de cada pasta
-                        dados_minerados['item_interno'] = 'CODIGO NAO ENCONTRADO' 
-                   
+                        dados_minerados['item_interno'] = 'CODIGO NAO \
+ENCONTRADO'
+
                 # Aqui executo nova analise apenas para codigo que
                 # formaram uma lista
                 elif type(cod_ficticio) is list:
@@ -130,13 +133,16 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
                             # {lista_cod[lista_cod.index(item)-1]}')
                             mov_pastas_arqs(item,
                                             lista_cod[
-                                                lista_cod.index(item)-1].strip(),
+                                                lista_cod.index(item)-1].strip(
+                                                    ),
                                             arq_cnc, ext_arq_cnc)
                             # Info inserida no dict de cada pasta
                             if (lista_cod[lista_cod.index(item)-1]) == '':
-                                dados_minerados['item_interno'] = 'CODIGO NAO ENCONTRADO'
+                                dados_minerados['item_interno'] = 'CODIGO NAO \
+ENCONTRADO'
                             else:
-                                dados_minerados['item_interno'] = lista_cod[lista_cod.index(item)-1]
+                                dados_minerados['item_interno'] = lista_cod[
+                                    lista_cod.index(item)-1]
 
     # Copia necessaria da lista para dentro da dict de cada pasta para zerar
     # a lista
@@ -186,18 +192,37 @@ def mov_pastas_arqs(cod_mercado, cod_interno, arq_cnc, ext_arq_cnc):
         # Variavel para pegar a posicao do "L"
         qtd_L = int(arq_cnc.count('L'))
         # Tratamento para aquivos sem "L" no nome
-        if qtd_L == 0 or str(arq_cnc.find('L') + 1) not in '1, 2, 3':
+        if qtd_L == 0 and str(arq_cnc.find('L') + 1) not in '1, 2, 3':
             arq_txt = new_path + separador + cod_interno + ".txt"
             shutil.copy(old_path_arq, arq_txt)
         # Tratamento para aqruivo com 1 "L" no nome
         elif qtd_L == 1:
             pos_L = int(arq_cnc.find('L') + 1)
-            arq_txt = new_path + separador + cod_interno + "_L" + arq_cnc[pos_L] + ".txt"
-            shutil.copy(old_path_arq, arq_txt)
+            try:
+                arq_txt = new_path + separador + cod_interno + "_L" +\
+                    arq_cnc[pos_L] + ".txt"
+            except IndexError:
+                arq_txt = new_path + separador + cod_interno + ".txt"
+                shutil.copy(old_path_arq, arq_txt)
+            else:
+                shutil.copy(old_path_arq, arq_txt)
         elif qtd_L > 1:
-            pos_L = int(arq_cnc.find('L') + 1)
-            arq_txt = new_path + separador + cod_interno + ".txt"
-            shutil.copy(old_path_arq, arq_txt)
+            teste_L = arq_cnc[-5:]
+        
+            if int(teste_L.count('L')) > 1:
+                pos_L = int(arq_cnc.find('L') + 1)
+                arq_txt = new_path + separador + cod_interno + ".txt"
+                shutil.copy(old_path_arq, arq_txt)
+            else:
+                pos_L = int(teste_L.find('L') + 1)
+                try:
+                    arq_txt = new_path + separador + cod_interno + "_L" +\
+                        teste_L[pos_L] + ".txt"
+                except IndexError:
+                    arq_txt = new_path + separador + cod_interno + ".txt"
+                    shutil.copy(old_path_arq, arq_txt)
+                else:
+                    shutil.copy(old_path_arq, arq_txt)
     # Tratamento para arquivo que não batem com "L" ou codigo
     # de mercado no nome do arquivo antigo
     else:
@@ -205,9 +230,11 @@ def mov_pastas_arqs(cod_mercado, cod_interno, arq_cnc, ext_arq_cnc):
         arq_txt = new_path + separador + cod_interno + ".txt"
         shutil.copy(old_path_arq, path_new_file)
         # Quando for imagem, o tratamento: copiar e renomear
-        if ext_arq_cnc == '.jpg' or ext_arq_cnc == '.JPEG' or ext_arq_cnc == '.png':
+        if ext_arq_cnc == '.jpg' or ext_arq_cnc == '.JPEG' or \
+           ext_arq_cnc == '.png':
             global cont_foto
-            arq_foto = new_path + separador + cod_interno + "_" + str(cont_foto) + ".jpg"
+            arq_foto = new_path + separador + cod_interno + "_" + str(
+                cont_foto) + ".jpg"
             shutil.move(path_new_file, arq_foto)
             cont_foto += int(1)
             # print(f'------ {arq_foto}')
@@ -217,7 +244,9 @@ def mov_pastas_arqs(cod_mercado, cod_interno, arq_cnc, ext_arq_cnc):
             # dentro do txt uma OBS avisando que o arquivo precisa
             # ser revisado
             shutil.copy(old_path_arq, arq_txt)
-            msg = (f'(CUIDADO ESTE CNC NÃO FOI ENTRADO DENTRO DA PASTA CODIGO MERCADO! Copiamos Codigo Mercado {cod_mercado} para Codigo Interno {cod_interno})')
+            msg = (f'(CUIDADO ESTE CNC NÃO FOI ENTRADO DENTRO DA PASTA CODIGO \
+MERCADO! Copiamos Codigo Mercado {cod_mercado} para Codigo Interno \
+{cod_interno})')
             infos_txt = []
             with open(arq_txt, 'r+') as file_obj:
                 for n_line, texto in enumerate(file_obj):
@@ -235,6 +264,8 @@ def mov_pastas_arqs(cod_mercado, cod_interno, arq_cnc, ext_arq_cnc):
 
 # Variaveis de ambiente para leitura no caminho original e caminho novo
 ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\tornos'
+# Testes com este caminho:
+# 'C:\\Users\\gogon\\Documents\\Inga\\teste tornos\\gl250'
 separador = '\\'
 new_ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\NOVOS tornos' \
                 + separador
@@ -264,8 +295,8 @@ for raiz, subpastas, arqs in os.walk(ponto_zero+separador):
         # os nomes dos arquivos e extensao em separado para facilitar a
         # manipulacao dentro da funcao.
         if ext_arq != '.db':  # Nao trato arquivos com .db das fotos
-            tratamento_nomes_pasta(last_nivel_pasta, old_name_arq_sem_ext, ext_arq)
-
+            tratamento_nomes_pasta(last_nivel_pasta,
+                                   old_name_arq_sem_ext, ext_arq)
 
 
 """
@@ -280,14 +311,17 @@ log = 'C:\\Users\\gogon\\Documents\\Inga\\cam\\log_pos_tratamento.csv'
 with open(log, 'a') as file_obj3:
     for line, i in enumerate(dados_lib):
         if line == 0:
-            file_obj3.write('qtd_itens' + ';' + 'nome_pasta' + ';' + 'separacao_nome_pasta' + ';' + 'COD_Interno' + '\n')
+            file_obj3.write('qtd_itens' + ';' + 'nome_pasta' + ';' +
+            'separacao_nome_pasta' + ';' + 'COD_Interno' + '\n')
             dado = str(i["dado_extraido"])
             item_erp = str(i["item_interno"])
-            file_obj3.write(str(line) + ";" + i['nome_pasta'] + ";" + dado + ";" + item_erp + '\n')
+            file_obj3.write(str(line) + ";" + i['nome_pasta'] + ";" + dado +
+             ";" + item_erp + '\n')
         else:
             dado = str(i["dado_extraido"])
             item_erp = str(i["item_interno"])
-            file_obj3.write(str(line) + ";" + i['nome_pasta'] + ";" + dado + ";" + item_erp + '\n')
+            file_obj3.write(str(line) + ";" + i['nome_pasta'] + ";" + dado +
+            ";" + item_erp + '\n')
 
 """
 print('OLHE o LOG')
