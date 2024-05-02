@@ -60,8 +60,7 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
             # testes, ela se reescreve a cada testagem
             cod_ficticio = saneamento_word_n2
             for i in cod_ficticio:
-                # Valores inseridos dentro do dict de cada pasta
-                dados_minerados['dado_extraido'] = dados_encontrados.append(i)
+                dados_encontrados.append(i)
         else:
             # print(f'ACHEI PALAVRA ==> {trecho}')
             cod_ficticio = trecho
@@ -97,8 +96,12 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
                                             lista_cod.index(item)-1].strip(),
                                         arq_cnc, ext_arq_cnc)
                         # Info inserida no dict de cada pasta
+                        dados_minerados['frag_nome_pasta'] = saneamento_word_n1
+                        dados_minerados['frag_cod_mercado'] = cod_ficticio
                         dados_minerados['item_interno'] = lista_cod[
                             lista_cod.index(item)-1]
+                        # Append na lista final contendo todas dicts acumuladas
+                        dados_lib.append(dados_minerados.copy())
                     # Nova validacao para remover um caracter final
                     # para procurar novo match com o csv
                     elif str(cod_ficticio[:-1]) == str(item):
@@ -113,13 +116,18 @@ def tratamento_nomes_pasta(caminho, arq_cnc, ext_arq_cnc):
                                         arq_cnc, ext_arq_cnc)
 
                         # Info inserida no dict de cada pasta
+                        dados_minerados['frag_nome_pasta'] = saneamento_word_n1
+                        dados_minerados['frag_cod_mercado'] = cod_ficticio
                         dados_minerados['item_interno'] = lista_cod[
                             lista_cod.index(item)-1]
+                        # Append na lista final contendo todas dicts acumuladas
+                        dados_lib.append(dados_minerados.copy())
 
                     else:
+                        pass
                         # Info inserida no dict de cada pasta
-                        dados_minerados['item_interno'] = 'CODIGO NAO \
-ENCONTRADO'
+                        # dados_minerados['item_interno'] = 'CODIGO NAO \
+# ENCONTRADO'
 
                 # Aqui executo nova analise apenas para codigo que
                 # formaram uma lista
@@ -138,17 +146,17 @@ ENCONTRADO'
                                             arq_cnc, ext_arq_cnc)
                             # Info inserida no dict de cada pasta
                             if (lista_cod[lista_cod.index(item)-1]) == '':
-                                dados_minerados['item_interno'] = 'CODIGO NAO \
-ENCONTRADO'
+                                pass
                             else:
+                                dados_minerados['frag_nome_pasta\
+                                                '] = saneamento_word_n2
+                                dados_minerados['frag_cod_mercado\
+                                                '] = frag_cod_list
                                 dados_minerados['item_interno'] = lista_cod[
                                     lista_cod.index(item)-1]
-
-    # Copia necessaria da lista para dentro da dict de cada pasta para zerar
-    # a lista
-    dados_minerados['dado_extraido'] = dados_encontrados.copy()
-    # Append na lista final contendo todas dicts acumuladas
-    dados_lib.append(dados_minerados.copy())
+                                # Append na lista final contendo todas dicts
+                                # acumuladas
+                                dados_lib.append(dados_minerados.copy())
 
 
 def mov_pastas_arqs(cod_mercado, cod_interno, arq_cnc, ext_arq_cnc):
@@ -264,6 +272,7 @@ MERCADO! Copiamos Codigo Mercado {cod_mercado} para Codigo Interno \
 
 # Variaveis de ambiente para leitura no caminho original e caminho novo
 ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\tornos'
+
 # Testes com este caminho:
 # 'C:\\Users\\gogon\\Documents\\Inga\\teste tornos\\gl250'
 separador = '\\'
@@ -275,6 +284,7 @@ new_ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\NOVOS tornos' \
 # Leitura de pastas e subpastas até chegar na base do arquivo
 dados_minerados = {}  # Recebe os dados de cada pasta
 dados_lib = []  # Compilada todas pastas em uma lista com dict
+qtd_pasta_lida = 0
 for raiz, subpastas, arqs in os.walk(ponto_zero+separador):
     cont_foto = int(1)  # Conta apenas fotos
     for arq in arqs:
@@ -285,6 +295,7 @@ for raiz, subpastas, arqs in os.walk(ponto_zero+separador):
         old_path_arq = raiz+separador+old_name_arq
         # Quebra em arquivo e extensao
         old_name_arq_sem_ext, ext_arq = os.path.splitext(arq)
+        qtd_pasta_lida += 1
         # Tupla contendo o caminho em 0 e 1 o ultimo nivel de pasta na
         # estrutura que o OS.path caminha, variavel utilizada para manipular
         # a ultima pasta antes do arquivo final
@@ -299,29 +310,25 @@ for raiz, subpastas, arqs in os.walk(ponto_zero+separador):
                                    old_name_arq_sem_ext, ext_arq)
 
 
-"""
-for line, i in enumerate(dados_lib):
-    print(f'Linha {line} => {i}')
-    print(f'COD_Int ====== {i["item_interno"]}')
-
 log = 'C:\\Users\\gogon\\Documents\\Inga\\cam\\log_pos_tratamento.csv'
-
-
 
 with open(log, 'a') as file_obj3:
     for line, i in enumerate(dados_lib):
         if line == 0:
-            file_obj3.write('qtd_itens' + ';' + 'nome_pasta' + ';' +
-            'separacao_nome_pasta' + ';' + 'COD_Interno' + '\n')
-            dado = str(i["dado_extraido"])
-            item_erp = str(i["item_interno"])
-            file_obj3.write(str(line) + ";" + i['nome_pasta'] + ";" + dado +
-             ";" + item_erp + '\n')
+            file_obj3.write('qtd_itens' + ';' + 'Nome Pasta Encontrada\
+                            ' + ';' + 'Nome da Pasta Fragmentado\
+                            ' + ';' + 'Codigo Mercado Encontrado\
+                            ' + ';' + 'Codigo Interno Correspondente' + '\n')
+            file_obj3.write(f'Numero pastas que foram lidas {qtd_pasta_lida}\
+                            ;;;;' + '\n')
+            file_obj3.write(f"{str(line)};{str(i['nome_pasta'])};\
+                            {str(i['frag_nome_pasta'])};\
+                            {str(i['frag_cod_mercado'])};\
+                            {str(i['item_interno'])}'\n'")
         else:
-            dado = str(i["dado_extraido"])
-            item_erp = str(i["item_interno"])
-            file_obj3.write(str(line) + ";" + i['nome_pasta'] + ";" + dado +
-            ";" + item_erp + '\n')
+            file_obj3.write(f"{str(line)};{str(i['nome_pasta'])};\
+                            {str(i['frag_nome_pasta'])};{str(i['frag_cod_mercado'])};\
+                            {str(i['item_interno'])}'\n'")
 
-"""
+
 print('OLHE o LOG')
