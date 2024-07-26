@@ -246,6 +246,18 @@ def mov_pastas_arqs(cod_mercado, cod_interno, arq_cnc, ext_arq_cnc):
             shutil.move(path_new_file, arq_foto)
             cont_foto += int(1)
             # print(f'------ {arq_foto}')
+        elif ext_arq_cnc == '.pdf' or ext_arq_cnc == '.PDF':
+            global cont_pdf
+            arq_foto = new_path + separador + cod_interno + "_" + str(
+                cont_pdf) + ".pdf"
+            shutil.move(path_new_file, arq_foto)
+            cont_pdf += int(1)
+        elif ext_arq_cnc == '.docx':
+            global cont_doc
+            arq_foto = new_path + separador + cod_interno + "_" + str(
+                cont_pdf) + ".docx"
+            shutil.move(path_new_file, arq_foto)
+            cont_pdf += int(1)
         else:
             # Tratamento para arquivos que o .nc nao batem em nada
             # o codigo interno, copio o aquivo, renomeio e insiro 
@@ -271,12 +283,12 @@ MERCADO! Copiamos Codigo Mercado {cod_mercado} para Codigo Interno \
 
 
 # Variaveis de ambiente para leitura no caminho original e caminho novo
-ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\tornos'
+ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\centros'
 
 # Testes com este caminho:
 # 'C:\\Users\\gogon\\Documents\\Inga\\teste tornos\\gl250'
 separador = '\\'
-new_ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\NOVOS tornos' \
+new_ponto_zero = 'C:\\Users\\gogon\\Documents\\Inga\\NOVOS centros'\
                 + separador
 
 
@@ -287,6 +299,8 @@ dados_lib = []  # Compilada todas pastas em uma lista com dict
 qtd_pasta_lida = 0
 for raiz, subpastas, arqs in os.walk(ponto_zero+separador):
     cont_foto = int(1)  # Conta apenas fotos
+    cont_pdf = int(1)
+    cont_doc = int(1)
     for arq in arqs:
         # # print()
         # print(arq)  # Verificar qual arquivo está chegando
@@ -310,7 +324,7 @@ for raiz, subpastas, arqs in os.walk(ponto_zero+separador):
                                    old_name_arq_sem_ext, ext_arq)
 
 
-log = 'C:\\Users\\gogon\\Documents\\Inga\\cam\\log_pos_tratamento.csv'
+log = 'C:\\Users\\gogon\\Documents\\Inga\\cam\\log_pos_tratamentoCENTROS.csv'
 
 with open(log, 'a') as file_obj3:
     for line, i in enumerate(dados_lib):
