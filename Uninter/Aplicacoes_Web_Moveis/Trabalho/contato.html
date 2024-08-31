@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br"> <!--padrao de lingua-->
+
+<head>
+    <meta charset="UTF-8"> <!--padrao de caracter-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="estilo_page.css"> <!--arquivo de estilizacao-->
+    <!-- Pagina para estilizacao do conteudo -->
+</head>
+
+<body>
+
+    <ul id="menu"> <!--menu da pagina-->
+        <li><a href="index.html">Quem Sou</a></li>
+        <li><a href="formacao.html">Formação</a></li>
+        <li><a href="portfolio.html">Portfólio</a></li>
+        <li><a href="contato.html">Contato</a></li>
+    </ul>
+
+    <div id="titulo"> <!--titulo da pagina-->
+        <h1>Entre em contato comigo!</h1>
+    </div>
+    <div> <!--div para segmentar o texto e estilizar o span-->
+        <span>Telefone: 66 9.7898-3994</span>
+        <span>E-mail: meucorreio@todopoderoso.com</span>
+        <span>Endereço: General Câmara - Caxias do Sul - RS</span>
+        <span>OU escreva para mim no formulário abaixo:</span>
+    </div>
+    <div>
+        <form action="" method="get">
+            <p>
+
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="dados">
+                <!--o comando INPUT já traz a estrutura de dados do input-->
+                <br>
+                <label for="mail">E-mail:</label>
+                <input type="email" name="email" id="dados">
+                <!--o html já faz a validação se é um e-mail-->
+                <br>
+                <label for="fone">Telefone:</label>
+                <input type="tel" name="fone" id="dados">
+                <!--Ele já traz com o INPUT DATE a opção de calendário no código-->
+                <br>
+                <label for="">Mensagem:</label>
+                <textarea name="msg" id="" cols="30" rows="10"></textarea>
+                <!--TEXTAREA abre uma caixa de texto grande para entrada de textos diversos-->
+                <br>
+                <input type="submit" value="Enviar" id="btn">
+                <!--btn de INPUT SUBMIT irá enviar os dados que estão preenchidos no formulario,
+                não funcional para esta página-->
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>

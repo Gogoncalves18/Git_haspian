@@ -1,0 +1,122 @@
+/*fixacao do corpo da pagina com marge e ped zero e uma box para ficar como referencia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/*estilo para titulos de todas paginas com texto centralizado*/
+#titulo {
+    color: rgb(80, 141, 97);
+    text-align: center;
+    margin: 15px;
+}
+
+/*Estilo para todos os subtitulos com underline, texto menor e alinhamento pela esquerda*/
+#Subtitulo {
+    color: rgb(80, 141, 97);
+    text-align: left;
+    padding-left: 40px;
+    text-decoration-line: underline;
+    font-size: smaller;
+    padding-top: 40px;
+    padding-bottom: 25px;
+}
+
+/*definicao para o menu*/
+#menu {
+    list-style: none;
+    padding: 50;
+    background-color: rgb(80, 141, 97);
+}
+
+/*definicao para lista de menu ficar em uma linha na parte superior*/
+#menu li {
+    display: inline;
+}
+
+/*Definicao de uma caixa de area para os menus com o inline-block
+e um efeito de transicao com o transition de 0.5segundos*/
+#menu li a {
+    color: azure;
+    text-decoration: none;
+    display: inline-block;
+    padding: 20px;
+    text-align: center;
+    transition: background .5s;
+}
+
+/*troca de cor dos menus quando o mouse passa em cima*/
+#menu li a:hover {
+    background-color: darkgreen;
+}
+
+/*padronizacao de texto*/
+p {
+    color: rgb(80, 141, 97);
+    padding: 10px;
+    text-align: justify;
+    line-height: 25pt;
+}
+
+/*definicao da largura dos texto do formulario para alinhamento*/
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+/*este span esta sendo utilizado para a chamada das fotos*/
+span {
+    display: flex;
+    justify-content: center;
+    color: rgb(80, 141, 97);
+    padding: 10px;
+    text-align: center;
+    line-height: 25pt;
+    font-weight: bolder;
+}
+
+/*imagem definida com um percentual de área util da tela e display flex
+para conseguirmos movimentar a imagem e modificar o tamanho dela*/
+#image {
+    height: 60vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+#img {
+    width: 100%;
+}
+
+/*estilo para parte da lista de cursos e hover para modificar o tamanho*/
+#cursos {
+    list-style-type: disc;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(80, 141, 97);
+    line-height: 25pt;
+    padding-left: 25%;
+    padding-top: 50px;
+}
+
+#forma:hover {
+    font-size: x-large;
+}
+
+/*ajuste do botao que fica no formulario*/
+#btn {
+    background-color: rgb(80, 141, 97);
+    color: azure;
+    box-sizing: border-box;
+    bottom: 30%;
+    width: 300px;
+    height: 30px;
+}
+
+#btn:hover {
+    background-color: darkgreen;
+}
