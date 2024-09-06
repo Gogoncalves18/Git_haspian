@@ -1,0 +1,78 @@
+<!--
+Template base e um template salvo com o nome padrao base.html dentro 
+da pasta raiz templates. Como o proprio nome diz, ele servira como 
+padrao para os demais templates para entao facilitar a entrada de 
+texto no html. 
+Nele eu preciso marcar com chaves e percentual a palavra reservada
+block title e endblock, assim como block content e endblock. Elas sao 
+variaveis que buscara a estrutura do base.html e adicionara as 
+informacoes dos outros html, ver exemplo do list.html e yourname.html
+-->
+
+<!-- Variavel que diz para o django que ele deve carregar os 
+ arquivos statics do css e js -->
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Aqui inserimos o bootstrap para acelerar o ajuste -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Aqui defino atraves de chave percentual que estou carregando
+     a aqrquivo static e aponto o arquivo, sintaxe do django-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- link para buscar icones usando o fontaawesome, o codigo antes do 
+     .js e o codigo da minha conta -->
+    <script src="https://kit.fontawesome.com/4991e1826c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Este corpo todo foi copiada da página do bootstrap que 
+     possui varios exemplos  -->
+    <div class="container-fluid"> <!-- container fluid para tomar toda a largura da pagina -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">To Do</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Tarefas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Usuários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Sobre Nós</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <!-- Recebe o texto definido no arquivo final do html -->
+        {% block content %}{% endblock %}
+        <footer>
+            <p>Hora de Codar ToDo</p>
+        </footer>
+    </div>
+    <!-- A vantagem de usar o bootstrap e acelerar o load pq la ficara
+     parte dos arquivos -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- Aqui defino atraves de chave percentual que estou carregando
+     a aqrquivo static e aponto o arquivo, sintaxe do django-->
+    <script> src = "{% static 'js/scripts.js' %}"</script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<!-- Necessario colocar o termo abaixo para carregar
+ o templare base -->
+{% extends 'base.html' %}
+
+<!-- Tudo que esta entre os dois conjuntos de chave
+  o django fara a injecao no html base -->
+{% block title %}Lista de Tarefas{% endblock %}
+
+{% block content %}
+<!-- Bootstrap trabalha com o padrao de grid de 12 colunas
+  o que estou fazendo na div abaixo e definir uma ocupacao de 
+  10 colunas com um deslocamento de 1 coluna, sendo assim 
+  ele sempre ficara centralizado na tela e ainda estou
+  definindo um nome para a classe "list-div" -->
+<div class="offset-1 col-10 list-div">
+    <!-- Nome para o titulo da lista  -->
+    <h1>{{task.title}}</h1>
+    <p>{{task.description}}</p>
+    <p>dwielqbcipqbsdijacdqjasbdv~qbsda~vb qajsbdvj ab</p>
+</div>
+{% endblock %}

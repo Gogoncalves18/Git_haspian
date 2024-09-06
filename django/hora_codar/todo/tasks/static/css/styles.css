@@ -1,0 +1,122 @@
+/* Container pai de toda base html */
+.container-fluid {
+    padding: 0;
+}
+
+/* ajuste da barra de navegacao:*/
+/*-classe abaixo e do bootstrap*/
+/*- borda da barra de navegacao*/
+/*- uma pequena margem*/
+
+
+.navbar {
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+/* lista da barra de menu */
+.navbar-nav {
+    margin: auto;
+}
+
+.navbar-brand {
+    font-weight: bolder;
+    color: blue;
+}
+
+.navbar-light .navbar-nav a.nav-link {
+    color: blueviolet;
+    letter-spacing: 1px;
+}
+
+/*O padding em zero abaixo pega a classe toda de div e 
+tira o padding*/
+
+.list-div {
+    padding: 0;
+}
+
+/* Botao de adicionar 
+por ser div diferentes a add-div e search-div precisam ter o display
+definido como inline-block para ficar uma ao lado da outra
+*/
+
+.add-div {
+    background-color: chocolate;
+    cursor: pointer;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Botao de pesquisar */
+
+.search-div {
+    background-color: chocolate;
+    cursor: pointer;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+
+.fas.fa-search {
+    position: absolute;
+    right: 26px;
+    top: 150px;
+
+}
+
+/* Lista de tarefas completa com todos os itens*/
+
+.task-list {
+    padding-left: 0;
+}
+
+/* list-style tira os simbolos da lista
+border cria uma borda em volta de cada item */
+
+.task-item {
+    list-style: none;
+    padding-left: 0px;
+    color: blue;
+    font-size: 20px;
+    height: 50px;
+    padding-top: 10px;
+    border-bottom: 1px dashed #ccc;
+
+}
+
+/* Dentro das classes, o cursor: pointer mostra o cursor
+com dedo quando passa o mouse em cima, estas classes estao 
+dentro do icone. 
+Ja o float right joga os icones para direita do tamanho do div
+*/
+
+.fas.fa-trash,
+.fas.fa-edit {
+    cursor: pointer;
+    margin: 5px;
+    font-size: 20px;
+    float: right;
+}
+
+.fas.fa-trash {
+    color: crimson;
+}
+
+.fas.fa-edit {
+    color: chartreuse;
+}
+
+/* Rodape */
+
+footer {
+    background-color: #333;
+    height: 300px;
+    border-top: 2px solid #202020;
+}

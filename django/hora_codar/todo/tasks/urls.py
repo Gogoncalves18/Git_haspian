@@ -32,6 +32,7 @@ urlpatterns = [
     path('', views.tasklist, name='task-list'),
     # Passar dados via html, olhar o views.py, sendo o <str:name>
     # a maneira de passar parametros pela url.
-    path('yourname/<str:name>', views.yourName, name='yname')
+    path('yourname/<str:name>', views.yourName, name='yname'),
+    path('task/<int:id>', views.taskView, name='task-view'),
 ]
-#<str:name>
+# <str:name>

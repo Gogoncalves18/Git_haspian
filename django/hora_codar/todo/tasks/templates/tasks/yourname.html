@@ -1,15 +1,11 @@
-<html lang="en">
+<!-- Necessario colocar o termo abaixo para carregar
+ o templare base -->
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block title %}Indicação do nome:{% endblock %}
 
-<body>
-    <!-- Para chamar uma variavel no html quando retorno o request,
-     colocamos ela em chaves duplas duplas -->
-    <h1>O seu nome é: {{name}}</h1>
-</body>
-
-</html>
+<!-- Tudo que esta entre os dois conjuntos de chave
+ o django fara a injecao no html base -->
+{% block content %}
+<h1>O seu nome é: {{name}}</h1>
+{% endblock %}

@@ -19,7 +19,7 @@ from django.urls import path, include
 
 
 # Aqui e colocado as urls que criamos nos app, no caso de tasks, colocamos
-# '' vazia para ele pegar todas urls na raiz do projeto, a funcao include 
+# '' vazia para ele pegar todas urls na raiz do projeto, a funcao include
 # serve para adicionar as urls externas no projeto principal
 urlpatterns = [
     path('admin/', admin.site.urls),

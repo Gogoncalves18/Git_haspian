@@ -1,13 +1,51 @@
-<html lang="en">
+<!-- Necessario colocar o termo abaixo para carregar
+ o templare base -->
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<!-- Tudo que esta entre os dois conjuntos de chave
+ o django fara a injecao no html base -->
+{% block title %}Lista de Tarefas{% endblock %}
 
-<body>
-    <h1>lista de tarefas</h1>
-</body>
-
-</html>
+{% block content %}
+<!-- Bootstrap trabalha com o padrao de grid de 12 colunas
+ o que estou fazendo na div abaixo e definir uma ocupacao de 
+ 10 colunas com um deslocamento de 1 coluna, sendo assim 
+ ele sempre ficara centralizado na tela e ainda estou
+ definindo um nome para a classe "list-div" -->
+<div class="offset-1 col-10 list-div">
+    <!-- Nome para o titulo da lista  -->
+    <h1>Lista de Tarefas</h1>
+    <!-- Div que ira criar um botao que ocupara duas colunas-->
+    <div class="col-2 add-div">
+        <!-- Desenho de icone do Font Awesome preciso colocar um link especial
+         do site deles no arquivo base.html -->
+        <i class="fas fa-plus"></i> Adicionar tarefa
+    </div>
+    <div class="col-9 search-div">
+        <!-- placeholder e um texto que passamos para aparecer em letra de fonte
+         fraca para indicar o que escrever dentro do campo -->
+        <input class="form-control" type="text" id="search" name="search" placeholder="Nome da tarefa">
+        <!-- i utilizado para inserir um icone e a class vem do fonta awesome -->
+        <i class="fas fa-search"></i>
+    </div>
+    <ul class="task-list">
+        <!-- Abrindo o for com chaves e % permite criar um laco dentro do html 
+         ao qual leio depois a variavel dentro de cada item. Nao posso esquecer 
+         de fechar o for. Estas infos vem do models -->
+        {% for task in tasks %}
+        <li class="task-item">
+            <!-- span aqui e apenas para ajustar um espaco especial
+             e adicionado dois incones junto a ele -->
+            <!-- Foi aberto um link para uma nova pagina pq queremos abrir 
+              os detalhes da tarefa, por isto que ja estamos pegando a ID
+              da tarefa dentro da task, para carregar um dado de variavel
+              e necessario buscar entre uma dupla de chaves -->
+            <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
+            <span><i class="fas fa-trash"></i></span>
+            <span><i class="fas fa-edit"></i></span>
+        </li>
+        <!-- Fechamento do for -->
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
