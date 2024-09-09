@@ -1,0 +1,34 @@
+<!-- Necessario colocar o termo abaixo para carregar
+ o templare base -->
+{% extends 'base.html' %}
+
+<!-- Tudo que esta entre os dois conjuntos de chave
+   o django fara a injecao no html base -->
+{% block title %}Adicione uma Tarefa{% endblock %}
+
+{% block content %}
+<!-- Bootstrap trabalha com o padrao de grid de 12 colunas
+   o que estou fazendo na div abaixo e definir uma ocupacao de 
+   10 colunas com um deslocamento de 1 coluna, sendo assim 
+   ele sempre ficara centralizado na tela e ainda estou
+   definindo um nome para a classe "list-div" -->
+<div class="offset-1 col-10 list-div">
+    <h1>Adicione sua nova tarefa:</h1>
+    <!-- Aqui montamos um formulario que ira comunicar com a
+     funcao NewTask() em view chamando a funcao TaskForm()
+     que esta dentro de forms.py  -->
+    <form method="POST">
+        <!-- Sempre que usamos um form no django e necessario
+         usar um cross inject para evitar ataque, ele usa um token
+         interno para cada form enviado -->
+        {% csrf_token %}
+        <!-- Aqui eu recebo a variavel da NewTask() que esta na view.py
+         e nela eu posso usar ".as.p" que que distribui os dados do form
+         em paragrafos ""NAO DEU CERTO .AS.P NO FORM"" -->
+        {{ form }}
+        <!-- Class do bootstrap "btn btn-success" para gerar o btn -->
+        <input type="submit" class="btn btn-success" value="Criar Tarefa">
+    </form>
+    <p>efew~ffeb</p>
+</div>
+{% endblock %}

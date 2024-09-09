@@ -18,7 +18,9 @@ from django.db import models
 
 class Task(models.Model):
     # Variavel para alimentar um subselect dentro do charfield,
-    # ela recebe uma tupla com valor e descricao
+    # ela recebe uma tupla com valor e descricao, assim eu chamo
+    # a variavel "done" e dou um valor para ela e ela grava uma
+    # descricao no BD
     STATUS = (
         ('1', "doing"),
         ('2', "Done"),

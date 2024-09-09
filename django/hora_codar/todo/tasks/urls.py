@@ -30,6 +30,11 @@ urlpatterns = [
     path('ola xx mundo/', views.olamundo),
     # Nesta linha ele abre na janela raiz em http://127.0.0.1:8000/
     path('', views.tasklist, name='task-list'),
+    # url para conectar html 'newtask/' a funcao da view NewTask
+    path('newtask/', views.NewTask, name='new-task'),
+    # Url para editar task, nela eu passo um arg ID que e representado
+    # por <int:id>
+    path('edit/<int:id>', views.editTask, name="edit-task"),
     # Passar dados via html, olhar o views.py, sendo o <str:name>
     # a maneira de passar parametros pela url.
     path('yourname/<str:name>', views.yourName, name='yname'),

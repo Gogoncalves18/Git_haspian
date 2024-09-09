@@ -51,6 +51,10 @@ definido como inline-block para ficar uma ao lado da outra
     margin-bottom: 15px;
 }
 
+#link-hide {
+    text-decoration: none;
+}
+
 /* Botao de pesquisar */
 
 .search-div {

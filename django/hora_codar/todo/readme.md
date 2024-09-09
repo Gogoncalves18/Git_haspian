@@ -21,5 +21,10 @@
     13 - "python manage.py migration' e o cmd para o django criar a pasta migration e
         dentro dela criar as instrucoes para criacao dos dados e tabela que vem do models
     14 - Apos criar o BD e necessario cria o usuario com o 'python manage.py createsuperuser'
-    15 - Desenho do fluxo 
+    15 - Formularios no Django e necessario criar dentro do app um arquivo 'forms.py' que e
+        necessario importar o forms e tambem o .models buscando a funcao necessario, ele usa
+        o models para formatar e pegar os dados do formulario. A vantagem e que eu nao preciso fazer ele se adequar as entradas de dados no html, ele ja recebe do html e 
+        formata o dado.
+    16 - No html eu preciso usar um {% csrf_token %} dentro do .form com method post
+    XX - Desenho do fluxo 
 ![alt text](image.png)

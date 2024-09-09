@@ -16,36 +16,44 @@
     <!-- Nome para o titulo da lista  -->
     <h1>Lista de Tarefas</h1>
     <!-- Div que ira criar um botao que ocupara duas colunas-->
-    <div class="col-2 add-div">
-        <!-- Desenho de icone do Font Awesome preciso colocar um link especial
-         do site deles no arquivo base.html -->
-        <i class="fas fa-plus"></i> Adicionar tarefa
-    </div>
-    <div class="col-9 search-div">
-        <!-- placeholder e um texto que passamos para aparecer em letra de fonte
+    <!-- aqui cobrimos o botao de adicionar a tarefa com uma ancora
+     apontando para o html que possui a estrutura de criacao de tarefa
+    e aproveitamos a configuracao feita para o botao, nao influenciando
+    nela neste momento, foi colocado um id so para remover a linha sublinhada. -->
+    <a id="link-hide" href="newtask/">
+        <div class="col-2 add-div">
+            <!-- Desenho de icone do Font Awesome preciso colocar um link especial
+             do site deles no arquivo base.html -->
+            <i class="fas fa-plus"></i> Adicionar tarefa
+    </a>
+</div>
+<div class="col-9 search-div">
+    <!-- placeholder e um texto que passamos para aparecer em letra de fonte
          fraca para indicar o que escrever dentro do campo -->
-        <input class="form-control" type="text" id="search" name="search" placeholder="Nome da tarefa">
-        <!-- i utilizado para inserir um icone e a class vem do fonta awesome -->
-        <i class="fas fa-search"></i>
-    </div>
-    <ul class="task-list">
-        <!-- Abrindo o for com chaves e % permite criar um laco dentro do html 
+    <input class="form-control" type="text" id="search" name="search" placeholder="Nome da tarefa">
+    <!-- i utilizado para inserir um icone e a class vem do fonta awesome -->
+    <i class="fas fa-search"></i>
+</div>
+<ul class="task-list">
+    <!-- Abrindo o for com chaves e % permite criar um laco dentro do html 
          ao qual leio depois a variavel dentro de cada item. Nao posso esquecer 
          de fechar o for. Estas infos vem do models -->
-        {% for task in tasks %}
-        <li class="task-item">
-            <!-- span aqui e apenas para ajustar um espaco especial
+    {% for task in tasks %}
+    <li class="task-item">
+        <!-- span aqui e apenas para ajustar um espaco especial
              e adicionado dois incones junto a ele -->
-            <!-- Foi aberto um link para uma nova pagina pq queremos abrir 
+        <!-- Foi aberto um link para uma nova pagina pq queremos abrir 
               os detalhes da tarefa, por isto que ja estamos pegando a ID
               da tarefa dentro da task, para carregar um dado de variavel
               e necessario buscar entre uma dupla de chaves -->
-            <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
-            <span><i class="fas fa-trash"></i></span>
-            <span><i class="fas fa-edit"></i></span>
-        </li>
-        <!-- Fechamento do for -->
-        {% endfor %}
-    </ul>
+        <span><a href="/task/{{task.id}}">{{task.title}}</a></span>
+        <span><i class="fas fa-trash"></i></span>
+        <a href="edit/{{task.id}}">
+            <span<i class="fas fa-edit">xxxx</i></span>
+        </a>
+    </li>
+    <!-- Fechamento do for -->
+    {% endfor %}
+</ul>
 </div>
 {% endblock %}
