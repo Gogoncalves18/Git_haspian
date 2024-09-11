@@ -1,7 +1,13 @@
 {
-    // Use o IntelliSense para saber mais sobre os atributos possíveis.
-    // Focalizar para exibir as descrições dos atributos existentes.
-    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "name": "C#: Aula01",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}\\Uninter\\Fundamentos.Programacao.I\\Aula01\\Aula01.csproj",
+            "launchConfigurationId": "TargetFramework=;Aula01"
+        }
+    ],
+    "console": "externalTerminal"
 }
