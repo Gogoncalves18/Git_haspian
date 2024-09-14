@@ -47,5 +47,5 @@
     - (input-param) => expression
     - (input-param) => { <sequencia de codigo>}
 - Há dois métodos de encapsulamento:
-    - ACITION e ACTION<T> - este pode receber param e não retornar valores
-    - FUNC<T> - este pode receber param e "retornar" *valores*
+    - ACITION e ACTION<T> - este pode receber param e *não retornar* valores
+    - FUNC<T> - este pode receber param e *retornar* _valores_
