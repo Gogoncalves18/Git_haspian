@@ -36,3 +36,13 @@
 ## Conversões entre Collection
 
 - Todas as Collection são armazenados em Array
+
+## LINQ
+
+- LINQ permite que consulte qualquer coleção que implemente IEnumerable<T>, Array, Lista ou XML DOM, fontes de dados remota, BD SQL. Ele é a unificação da tipagem em tempode compilação e composição de consultas dinâmicas em coleções.
+- Há dois de notações para LINQ:
+    -- Fluent Syntax
+    -- Query Expression
+- No LINQ é impressendível trabalharmos com LAMBDA que podemos ter as seguintes expressões:
+    -- (input-param) => expression
+    -- (input-param) => { <sequencia de codigo>}
