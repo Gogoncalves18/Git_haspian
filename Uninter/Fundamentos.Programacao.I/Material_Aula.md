@@ -42,6 +42,26 @@
 - LINQ permite que consulte qualquer coleção que implemente IEnumerable<T>, Array, Lista ou XML DOM, fontes de dados remota, BD SQL. Ele é a unificação da tipagem em tempode compilação e composição de consultas dinâmicas em coleções.
 - Há dois de notações para LINQ:
     - Fluent Syntax
+        - É a principal forma de percorrer uma Collection ou filtrar uma Collection
+        -----------------------
+        ![alt text](image-9.png)
+        -----------------------
+        - Nesta notação podemos encadear os operadores em uma forma de *PIPELINE*,  (uma espécie de fluxo ou esteira dos dados), com os operadores podemos: **Filtrar, Ordenar, Agregar, Agrupar, Unir e Converter**
+        -----------------------
+        ![alt text](image-10.png)
+        -----------------------
+        - Importante destacar que sempre que a Function tiver **2 param**, o primeiro será o de entrada e o segundo o de retorno da function, como o exemplo abaixo, o retorno será um boleano:
+        -----------------------
+        ![alt text](image-11.png)
+
+        ![alt text](image-12.png)
+        -----------------------
+        - Um operador de consulta LINQ **NUNCA** altera a sequência de entrada, ele só retornará uma nova sequência de dados, mas respeitando a primeira.
+        - Também posso ter uma entrada "T" e uma saída "Y" na tipagem de dados, o ex abaixo mostra uma entrada em STR leio os items da listar e retorno os comprimentos de cada dado, sua saída está sendo convertida para um INT por isto que ele está dentro de <> e ainda está sendo implementado um IEnumerable para podermos interar sobre ela.
+        -----------------------
+        ![alt text](image-13.png)
+        -----------------------
+
     - Query Expression
 - No LINQ é impressendível trabalharmos com LAMBDA que podemos ter as seguintes expressões:
     - (input-param) => expression
