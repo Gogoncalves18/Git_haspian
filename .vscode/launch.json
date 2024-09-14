@@ -5,7 +5,7 @@
             "name": "C#: Aula01",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}\\Uninter\\Fundamentos.Programacao.I\\Aula01\\Aula01.csproj",
+            "projectPath": "${workspaceFolder}\\Uninter\\Fundamentos.Programacao.I\\Aula2\\Aula2.csproj",
             "launchConfigurationId": "TargetFramework=;Aula01"
         }
     ],
