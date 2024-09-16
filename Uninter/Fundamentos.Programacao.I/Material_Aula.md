@@ -63,9 +63,63 @@
         -----------------------
 
     - Query Expression
+        - Síntaxe parecida como escrever SQL. Abaixo um exemplo parecido com o de cima.
+        ------------------------
+        ![alt text](image-14.png)
+
+        ![alt text](image-15.png)
+        - No exemplo abaixo estamos utilizando um mix das duas linguagem, na funcao **mixQueries**, estamos:
+            - percorrendo um "N" in uma "ARRAY"
+            - Executando um JOIN do NOMEY in um novo ARRAY
+            - Este segundo array vem um uma função lambda que retorna palavras que contem a letra Y
+            - O join jogará o resultado de N sobre as palavras igual do resultado de NOMEY
+            - Depois ele seleciona o resultado para elementos que possui mais que 3 letras com WHERE
+            - E por fim jogamos o resultado para maiusculo com n.ToUpper e ordenamos de forma descrescente
+            ![alt text](image-16.png)
+
+
+
 - No LINQ é impressendível trabalharmos com LAMBDA que podemos ter as seguintes expressões:
     - (input-param) => expression
     - (input-param) => { <sequencia de codigo>}
 - Há dois métodos de encapsulamento:
     - ACITION e ACTION<T> - este pode receber param e *não retornar* valores
     - FUNC<T> - este pode receber param e *retornar* _valores_
+
+## Execução Tardia ( Deffered Execution ou Lazzi Execution)
+
+- Conceito deste tipo de execução é que ela não é executada no momento que é construída, é executada somente após chamarmos ela. O exemplo abaixo define isto, CORREÇÃO, no lugar da query em foreach, é o nome do segundo VAR:
+    ![alt text](image-17.png)
+    - Assim podemos reutiliza-la e reprogramar os dados dentro dela sempre que precisarmos
+
+- Agora se queremos mantê-la integra, precisamos aplicar o Tolist ou ToArray, como este caso, que força uma nova coleção interna:
+    ![alt text](image-18.png)
+
+## Operadores LINQ
+
+- Há 3 tipos de categorias de operadores:
+    - "Coleção in", "Coleção Out"
+    - "Coleção in", "Elemento Out"
+    - Sem param, "Coleção Out"
+
+- **Operadores de filtro**, sempre retornarão com dados na mesma qtd ou menor e sempre do mesmo TYPE:
+    ![alt text](image-19.png)
+
+- **Operadores de Projeção**, Transforma o TYPE de entrada e um novo TYPE de saída
+    ![alt text](image-20.png)
+    - Um operador SELECT pode retornar um TYPE ANÔNIMO que é um SYSTEM.OBJECT que possui apenas propriedades criadas em tempo de execução, para isto ele precisa ser combinado com a palavra "newm {...}"
+    ![alt text](image-21.png)
+    OBS.: CULTUREINFO é as linguagens instaladas no computador. Neste caso estamos montando um objeto com suas propriedades. Importante: **Neste tipo de objeto não conseguimos altera-lo e nem atribuir valores para suas propriedades**
+
+- **Operadores de combinação**
+    ![alt text](image-22.png)
+
+- **Operadores de ordenação**
+    ![alt text](image-23.png)
+
+- **Operadores de conversão**, a grande maioria implementarão a coleção uma enumeração aos dados
+    ![alt text](image-24.png)
+
+- **Operadores de agregação**
+    ![alt text](image-25.png)
+    
