@@ -35,5 +35,6 @@
 
 ![alt text](image-10.png)
 
-/**/ 27min
+## Ex 05 - Query 1
+![alt text](image-11.png)
 
