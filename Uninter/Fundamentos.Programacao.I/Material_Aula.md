@@ -122,4 +122,48 @@
 
 - **Operadores de agregação**
     ![alt text](image-25.png)
-    
+
+## Treads
+
+- O computador executa um processo chamado Preempção para poder executar várias tarefas ao mesmo tempo através do algotítmo Round Robin
+
+- Diferença entre **Processos e Threads**
+    - Processos são containers que executam um programa
+    - A thread compõe o processo, isto é, um processo pode possuir várias threads
+    - O SO realiza a preempção entre os espaços de espera das Threads
+
+- Cada Processo possui seu próprio contexto de execução, assim o SO isola ela 
+
+- Em C# podemos escrever várias threads e fazer o SO esperar ela ser finalizada com o método .Join() que está dentro da Threads:
+![alt text](image-26.png)
+- Thread.Sleep() é outra forma de espera, colocando um tempo determinado para a thread em execução
+- A thread possui alguns status **Unstarded, Running, WaitSleepJoin, Stopped**
+- Blocking de Threads é qq pause feito na thread
+- Uma Thread é uma operação de baixo nível e não conseguimos ter retorno de valores dela, não conseguimos orquestra-las. Por esta razão o C# trabalha também com **Task** que é uma abstração de nível mais alto, estas podem ser tipadas, podem ser encadeadas e podem retornar valores
+    ![alt text](image-28.png)
+------------------
+![alt text](image-29.png)
+
+![alt text](image-30.png)
+
+## Processos Assincronos e Await
+
+- Este recurso é utilizado principalmente para processamentos pesados e para conexão com I/O para troca de dados.
+- O Async/Await existem para facilitar a manipulação das Tasks e um dos benefícios é que este recurso libera a Thread, que está tocando a Task, para outros processos enquanto ela está em espera.
+- **Thread Pool** é uma estrutura gerenciada pela CLR, que toda dot net tem. Ela controla a qtd de Threads disponíveis e as em execução e é ele que faz a alocação de uma nova Thread junto com o SO.
+    ![alt text](image-31.png)
+
+    ![alt text](image-32.png)
+
+## Async/Await e Bounded Conext
+
+![alt text](image-33.png)
+![alt text](image-34.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
+
+- O controle dos I/O estão dentro do system.io
+    ![alt text](image-37.png)
+
+- Async/Await é indicado ser usado para esperar um I/O principalmente nos seguintes casos:
+    ![alt text](image-38.png)
