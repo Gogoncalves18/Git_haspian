@@ -48,6 +48,12 @@ public class ThreadPing
             // Mesmo apos ter encerrado o metodo "ExecutePing()", a THREAD demora para ser derrubada
             // tanto e que ela ira imprimir varias vezes a frase abaixo.
             Console.WriteLine("\nEsperando thread finalizar");
+
+            // Exercicio Ex 01 - B, com esta linha de comando abaixo, e impresso a frase em cima uma 
+            // vez apenas e a thread fica em espera ate que o metodo que ela chamou seja finalizado
+            // entao apos podemos ver a frase abaixo, para testar isto e so apertar "S" na saida do
+            // programa.
+            threadPingger.Join();
         }
 
         // Alguns segundos depois ela para de imprimir a frase acima e imprime esta frase quando
@@ -56,9 +62,29 @@ public class ThreadPing
 
     }
 
+    /*
+        // Ex 01 - A  
+        public void ExecutePing()
+        {
+            while (executePing)
+            {
+                Ping pingger = new Ping();
+                var pingResponse = pingger.Send(endereco);
+
+
+                Console.WriteLine($"Ping {countPing}: {endereco} | Status: {pingResponse.Status} - {pingResponse.RoundtripTime}ms");
+                countPing++;
+
+                // Espera de 2 segundos
+                Thread.Sleep(2000);
+            }
+        }
+    */
+
+    // Ex 01 - B  
     public void ExecutePing()
     {
-        while (executePing)
+        while (countPing < 4)
         {
             Ping pingger = new Ping();
             var pingResponse = pingger.Send(endereco);

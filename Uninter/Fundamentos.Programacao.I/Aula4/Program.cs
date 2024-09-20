@@ -12,9 +12,17 @@ class Program
 
         Console.WriteLine("\n_________________________THREADS____________________\n");
 
-        ThreadPing Ex_Tread_01 = new ThreadPing();
-        Ex_Tread_01.StartPing();
+        //ThreadPing Ex_Tread_01 = new ThreadPing();
+        //Ex_Tread_01.StartPing();
+
+        Console.WriteLine("\n_________________________TASKS____________________\n");
+
+        var Ex_Task_02 = new PessoaFinder();
+        Ex_Task_02.ExPessoaAsync();
+
 
         Console.WriteLine("\n############################################################\n");
+
+
     }
 }
