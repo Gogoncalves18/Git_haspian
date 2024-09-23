@@ -167,3 +167,39 @@
 
 - Async/Await é indicado ser usado para esperar um I/O principalmente nos seguintes casos:
     ![alt text](image-38.png)
+
+## CONEXÃO A BD via .NET
+
+- Estudo sobre o **Entity Frameworks**
+    ![alt text](image-39.png)
+    ![alt text](image-40.png)
+    *Lembrando que um NUGET é um framework fora
+
+- Modelos de BD:
+    ![alt text](image-41.png)
+    ![alt text](image-42.png)
+
+- Polimorfismo e herança não são funções que possui uma representação real no BD, assim como na POO
+
+- Cenário para aula:
+    ![alt text](image-43.png)
+
+- Método mais importante do Framework:
+    ![alt text](image-44.png)
+    ![alt text](image-45.png)
+
+- Como instanciar uma class do DB
+    ![alt text](image-46.png)
+    ![alt text](image-47.png)
+    ![alt text](image-48.png)
+    ![alt text](image-49.png)
+
+- Correlação mais completa entre tabelas:
+    ![alt text](image-50.png)
+
+- Além do EF, temos o Dapper e o ADO.NET como Framework para conexão com o SQL
+    ![alt text](image-51.png)
+    ![alt text](image-52.png)
+    ![alt text](image-53.png)
+    ![alt text](image-54.png)
+    

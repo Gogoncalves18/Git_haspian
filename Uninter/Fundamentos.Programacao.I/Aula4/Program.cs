@@ -16,8 +16,8 @@ class Program
 
         Console.WriteLine("\n_________________________THREADS____________________\n");
 
-        //ThreadPing Ex_Tread_01 = new ThreadPing();
-        //Ex_Tread_01.StartPing();
+        ThreadPing Ex_Tread_01 = new ThreadPing();
+        Ex_Tread_01.StartPing();
 
         Console.WriteLine("\n_________________________TASKS____________________\n");
 
@@ -27,16 +27,23 @@ class Program
         resposta das "TASKS" que estao dentro dela. Importante e instanciar em uma variavel do 
         tipo TASK pois receberei as TASKs proveniente dela, por isto do "Task Ex_Task_02"
         */
-        Task Ex_Task_02 = new PessoaFinder().ExPessoaAsync();
+
+        / Task Ex_Task_02 = new PessoaFinder().ExPessoaAsync();
 
         // Na variavel ao qual estou recebendo da minha class "PessoaFinder", eu uso o metodo
         // da TASK para esperar a resposta delas. Importante, dentro da class eu tenho 3 TASKS
         // independentes, la eu uso um metodo "await Task.WhenAll" para esperar todas terminarem
         // so assim a minha linha abaixo deixa MAIN prosseguir
+
         Ex_Task_02.Wait();
 
-        Console.WriteLine("\n############################################################\n");
+        Console.WriteLine("\n_________________________TASKS EX 03____________________\n");
 
+        Task Ex_03 = new PesquisaDirWin().Ex_03_Task();
+
+        Ex_03.Wait();
+
+        Console.WriteLine("\n############################################################\n");
 
     }
 }

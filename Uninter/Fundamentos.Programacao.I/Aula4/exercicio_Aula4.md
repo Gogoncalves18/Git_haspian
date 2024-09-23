@@ -14,3 +14,7 @@
 ![alt text](image-3.png)
 
 ![alt text](image-4.png)
+
+# Ex 03 - TASKS
+---------------------
+![alt text](image-5.png)
