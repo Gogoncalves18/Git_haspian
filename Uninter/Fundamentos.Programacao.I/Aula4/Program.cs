@@ -28,7 +28,7 @@ class Program
         tipo TASK pois receberei as TASKs proveniente dela, por isto do "Task Ex_Task_02"
         */
 
-        / Task Ex_Task_02 = new PessoaFinder().ExPessoaAsync();
+        Task Ex_Task_02 = new PessoaFinder().ExPessoaAsync();
 
         // Na variavel ao qual estou recebendo da minha class "PessoaFinder", eu uso o metodo
         // da TASK para esperar a resposta delas. Importante, dentro da class eu tenho 3 TASKS
