@@ -42,8 +42,8 @@ def con_sql(driver, server, db, username, pw, tc):
     dados_df = []
     for index, row in df_sql.iterrows():
         # cmd_sql = "INSERT INTO SSPImport (OP, OPER, SEQOPER, DESCOPER, CODPECA, DESCPECA, PRODAUX1, PRODAUX2, PRODAUX3, PRODAUX4, MAQ, CENTROCUSTO, PLANDTINI, PLANHRINI, PLANDTFIM, PLANHRFIM, PLANQTY, CYCLEQTY, PLANTMUNIT, PLANTMSETUP, ACAO, STATUS, DateRegist, DateProcess) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cmd_sql = "INSERT INTO testeSYNECO VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        # cmd_sql = "INSERT INTO testeSYNECO VALUES (?, ?, ?, ?, ?)"
+        cmd_sql = "INSERT INTO pilotoSYNECO VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        # cmd_sql = "INSERT INTO pilotoSYNECO VALUES (?, ?, ?, ?, ?)"
         val = (row['OF'], row['OPER'], row['SEQOPER'], row['DESCOPER'], row['CODPECA'], row['DESCPECA'], row['PRODAUX1'], row['PRODAUX2'], row['PRODAUX3'], row['PRODAUX4'], row['MAQ'], row['CENTROCUSTO'], row['PLANDTINI'], row['PLANHRINI'], row['PLANDTFIM'], row['PLANHRFIM'], row['PLANQTY'], row['CYCLEQTY'], row['PLANTMUNIT'], row['PLANTMSETUP'], row['ACAO'], row['STATUS'], row['DATEREGIST'], row['DATEPROCESS'])
         # val = (row['OF'], row['OPER'], row['DESCOPER'], row['CODPECA'], row['DESCPECA'])
         
