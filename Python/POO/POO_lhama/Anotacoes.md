@@ -6,7 +6,7 @@ https://www.youtube.com/watch?v=d6mXFH9C4LY&list=PLAgbpJQADBGK8EemmTEoIwW08bXCjf
 - Exemplos abaixo para explicar o como representar um UML para POO
 
 ## Aula 03:
-![alt text](image.png)
+![alt text](image.png?w=256)
 - Sinal de "+" indica que o atributo ou método é público
 ## Aula 04:
 ![alt text](image-1.png)
@@ -52,13 +52,11 @@ https://www.youtube.com/watch?v=d6mXFH9C4LY&list=PLAgbpJQADBGK8EemmTEoIwW08bXCjf
 ## SOLID
 
 - A POO precisa respeita os princípios do SOLID, que são:
-**S** - Sigle Responsability, isto é, um módulo, classe ou metodo deve ter apenas uma única responsabilidade sobre a funcionalidade exercida pelo software. Ele deve ter um único objetivo. 
-**O** - Princípio aberto fechado, estebelece que as entidades da classe pode ser aberto para extensão, mas fechado para modificações. Isto é, a entidade pode ter seu comportamento extendido 
-sem alterar seu código fonte. #REF-Aula 11 e 11a.
-**L** - Substituição de **LISKOV**, diz que objetos podem ser substituídos por seus subtipos (classes herdeiras) sem que isto afete a execução do programa.
-**I** - Segregação das Interfaces, é não utilizar uma interface em que a classe não se utilizará totalmente de seus métodos. Caso contrário preciso fazer outra interface.
-**D** - Inversão da Dependência, é a dependência mais branda entre as classes, isto é, as classes
-se relacionam através das interfaces sendo suas instâncias construídas fora de cada classe.
+    - **S** - Sigle Responsability, isto é, um módulo, classe ou metodo deve ter apenas uma única responsabilidade sobre a funcionalidade exercida pelo software. Ele deve ter um único objetivo. 
+    - **O** - Princípio aberto fechado, estebelece que as entidades da classe pode ser aberto para extensão, mas fechado para modificações. Isto é, a entidade pode ter seu comportamento extendido sem alterar seu código fonte. #REF-Aula 11 e 11a.
+    - **L** - Substituição de **LISKOV**, diz que objetos podem ser substituídos por seus subtipos (classes herdeiras) sem que isto afete a execução do programa.
+    - **I** - Segregação das Interfaces, é não utilizar uma interface em que a classe não se utilizará totalmente de seus métodos. Caso contrário preciso fazer outra interface.
+    - **D** - Inversão da Dependência, é a dependência mais branda entre as classes, isto é, as classes se relacionam através das interfaces sendo suas instâncias construídas fora de cada classe.
 
 
 ## POLIMORFISMO
