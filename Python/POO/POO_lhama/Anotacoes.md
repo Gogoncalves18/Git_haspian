@@ -3,7 +3,10 @@ https://www.youtube.com/watch?v=d6mXFH9C4LY&list=PLAgbpJQADBGK8EemmTEoIwW08bXCjf
 
 
 # UML
-- Exemplos abaixo para explicar o como representar um UML para POO
+- Exemplos abaixo para explicar o como representar um UML para POO.
+
+- Representações convencionadas de setas no UML de classes para POO:
+![alt text](image-11.png)
 
 ## Aula 03:
 ![alt text](image.png?w=256)
@@ -41,6 +44,14 @@ https://www.youtube.com/watch?v=d6mXFH9C4LY&list=PLAgbpJQADBGK8EemmTEoIwW08bXCjf
 ## Aula 20:
 ![alt text](image-10.png)
 - Neste princípio da inversão de independência, podemos ver que temos a represenação de uma ligação de herança(linha fechada e seta aberta) de cls Principal herdando da interface do elemento e há outras duas classes sendo implementadas via classe abstradas através da interface ao qual elas herdam a interface também. Temos a inversão de independência quando então instanciamos as classes elemento e elemento_outro via obj fora da classe no programa principal.
+
+## Aula 21:
+![alt text](image-12.png)
+- **Agregação**, representada pelo losangulo aberto, normalmente agregações são compostos por lista de objetos, neste caso produto é agregado em carrinho.
+
+## Aula 22:
+![alt text](image-13.png)
+- **Composição**, representada por um losangulo *fechado*. Neste exemplo eu componho uma classe de outra classe, no exemplo da aula, eu tenho o repositorio que recebe a estrutura do cmd de outra classe. Neste exemplo, não carregamos no construtor a outra classe mas sim diretamente no atributo.
 
 ## Classes, atributos e Metodos
 
