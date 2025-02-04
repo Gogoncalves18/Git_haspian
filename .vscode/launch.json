@@ -2,6 +2,48 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "Aula4.Ex01.main",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "Uninter.POO_Java.Aula4.Ex01.main",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "Uninter.POO_Java.Aula3.ex04.main",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "Uninter.POO_Java.Aula3.ex03.matricula.main",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "main",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
+            "type": "java",
+            "name": "Principal",
+            "request": "launch",
+            "mainClass": "empresa.Principal",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
             "name": "C#: Aula01",
             "type": "dotnet",
             "request": "launch",

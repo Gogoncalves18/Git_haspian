@@ -22,9 +22,9 @@ class Pessoa:
     '''É possivel usar o "@property" para chamar o atribudo, neste caso
     eu não uso o () na chamado do metodo, eu chamo desta forma:
     "gus.getter_time"'''
-    # @property
-    # def getter_time(self) -> str:
-    #     return self.__time
+    @property
+    def getter_time(self) -> str:
+        return self.__time
 
     def apresentar(self):
         print(f'REF001 - Ola! Minha altura é {self.altura}.')
@@ -42,8 +42,8 @@ ze = Pessoa(1.60, cpf='324.000.002-10')
 gus.setter_time('Gremio')
 
 gus.apresentar()
-print(f'O time de dele é o {gus.getter_time()}.\n')
-# print(f'O time de dele é o {gus.getter_time}.\n')
+#print(f'O time de dele é o {gus.getter_time()}.\n')
+print(f'O time de dele é o {gus.getter_time}.\n')
 
 ze.apresentar()
-print(f'O time de dele é o {ze.getter_time()}')
+#print(f'O time de dele é o {ze.getter_time()}')
