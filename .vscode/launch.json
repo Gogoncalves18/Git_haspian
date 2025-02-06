@@ -5,6 +5,20 @@
             "type": "java",
             "name": "main",
             "request": "launch",
+            "mainClass": "Uninter.POO_Java.Aula5.Ex02.main",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
+            "mainClass": "Uninter.POO_Java.Aula5.A05.class_abstrata.main",
+            "projectName": "Git_haspian_cd64197e"
+        },
+        {
+            "type": "java",
+            "name": "main",
+            "request": "launch",
             "mainClass": "Aula4.Ex01.main",
             "projectName": "Git_haspian_cd64197e"
         },
