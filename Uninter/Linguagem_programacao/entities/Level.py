@@ -89,7 +89,7 @@ class Level:
             self.level_text(text_size=14, text=f'entities: {len(self.entity_list)}', text_color=COR_BRANCA, text_pos=(10,  WIN_HEIGHT - 20))        
             pygame.display.flip()
             # Envia para o mediador todos os objs que possuimos na lista de obj
-            Entity_Mediator.verificador_colisao(entity_list=self.entity_list)
+            Entity_Mediator.verificador_colisao(entity_list=self.entity_list) 
             Entity_Mediator.verificador_vida(entity_list=self.entity_list)
     
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):

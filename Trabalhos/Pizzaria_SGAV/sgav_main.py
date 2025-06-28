@@ -16,10 +16,11 @@ bak_sql_cbo = getenv("bak_sql_cbo")
 
 bck_pdv = Movimentacao_Backups(path_bck_pdv, new_path_bck_pdv, nome_fisco,
                                nome_venda_pdv, bak_sql_pdv)
-bck_cbo = Movimentacao_Backups(path_bck_cbo, new_path_bck_cbo, nome_fisco,
-                               nome_venda_cbo, bak_sql_cbo)
+
+# bck_cbo = Movimentacao_Backups(path_bck_cbo, new_path_bck_cbo, nome_fisco,
+#                               nome_venda_cbo, bak_sql_cbo)
+
 # Funcao para executar uma movimentacao de arquivos do bckup, estes
 # arquvivos sao salvos pelo Colibri ERP em uma pasta e movimentados
 # para outra pasta, extraidos, renomeados e restaurados
-bck_cbo.mov_bckup()
-
+bck_pdv.mov_bckup()
