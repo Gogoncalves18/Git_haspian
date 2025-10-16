@@ -1,22 +1,14 @@
-from modulos.conexao_bds import ConectorBD
-from modulos.crud_bd import RepositorioBD
-from dotenv import load_dotenv
-from os import getenv
+from datetime import datetime
 
-load_dotenv()
-
-driver = getenv('driver')
-server = getenv('server')
-db_pdv = getenv('db_pdv')
-username = getenv('username')
-password = getenv('password')
-tc = getenv('tc')
-bak_sql_pdv = getenv("bak_sql_pdv")
-
-conn_bd_pdv = ConectorBD(driver, server, db_pdv, username, password, tc)
-acoes = RepositorioBD(conn_bd_pdv)
-res = acoes.consulta_ped()
-print(res)
-conn_bd_pdv = ConectorBD(driver, server, db_pdv, username, password, tc)
-acoes = RepositorioBD(conn_bd_pdv)
-acoes.restaurar_bck(db_pdv, bak_sql_pdv)
+dados = ('bl1', 'bl1', '19:31:16', '19:31:16', '19:47:31', '19:54:23', '00:20:00', 7.3, 7.3, 'Jonathan Diego Souza ', '', '', 'Rua Doutor Alexandre Gutierrez, Água Verde, Curitiba', '359', 'Curitiba', -25.45043, -49.28418, -25.4576404, -49.2783563, 'none', '', '1.47', 4)
+ent = 1
+for i in dados:
+    if i == 'bl1':
+        try:
+            num = int(i)
+        except ValueError:
+            num = 5000 + ent
+            ent += 1        
+            print(num)
+        except Exception as e:
+            print(e)

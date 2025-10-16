@@ -1,0 +1,19 @@
+﻿CODIGO;ITEM_1;CRITERIO_1;DIM_1;SUP_1;INF_1;INST_1
+41CZEMHE60-C1;*S057;Rosca M2.0x0.40;-;-;-;CRA20
+43MPHECD40-C1;A;Altura Cone;0.90;+0.00;-0.06;PJP
+CM33MN4045-C1;S001;Ângulo Cone Morse;11°35';+0°20';-0°00';PJP
+ANHBHE33-C1;*S241;Rosca Interna M1.8x0.35;13 Voltas;-;-;CRT18
+41MNP40HE30-C1;S010;Ø Menor 4.5 Perfil 4 Cimentavel;3.00;+0.01;-0.01;PJP
+33MNAG15HE30-B1;S148;Ø Menor Perfil 3.3 Cimentável HE;2.51;+0.01;-0.01;PJP
+CM45MN4055AR-C1;S001;Ângulo Cone Morse;11°35';+0°20';-0°01';PJP
+CM45MNAG174045AR-C1;S001;Ângulo Cone Morse;11°35';+0°20';-0°00';PJP
+41MPHE50-C1;*S057;Rosca M2x0,4;-;-;-;CRA20
+41MPHE40-C1;*S057;Rosca M2x0,4;-;-;-;CRA20
+41PFCBHE-C1;*S057;Rosca M2x0,40;-;-;-;CRA20
+41PFCBHE-C2;*S058;Ø Externo Rosca;1,95;+0.03;-0.00;MCD25
+41PFCBHE-C3;S150;Ângulo da Base do Perfil 3.3 Cimentavel HE;6°03';+0°.10';-0°.10';PJP
+41PFCBHE-C4;S014;Ângulo da Base do Perfil 4 Cimentavel;8°.00';+0°.10';-0°.10';PJP
+41PFCBHE-C5;*239;Rosca Interna M1.4x0.3;6 Voltas;-;-;CRT14
+41PFCBHE-C6;*19997;Verificar Encaixe com Peça Padrão;P/P;-;-;PPCMANIM
+41PFCBHE-C7;PPCLCRMP;;*19998;Verificar Magnetismo;Sem Magn;-
+41PFCBHE-C8;-;Imã;*19999;Teste torque;≥15 Ncm;

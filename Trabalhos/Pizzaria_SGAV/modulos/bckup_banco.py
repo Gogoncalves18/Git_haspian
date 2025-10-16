@@ -14,7 +14,7 @@ class Movimentacao_Backups:
         self.nome_venda = nome_venda
         self.bak_sql = bak_sql_pdv
 
-    def mov_bckup(self) -> None:
+    def mov_bckup(self) -> bool:
         """
         Funcao para movimentacao do bckup do sql em zip de um local
         do dropbox para outro local. Apos extracao do arquivo, renomeacao
@@ -97,4 +97,3 @@ class Movimentacao_Backups:
                 os.remove(new_file)
             # Aciona a funcao que conversa com o BD e executa o script SQL
             print(f'## BAK >>> {nome_arq} <<< NA POSICAO PARA RESTAURACAO')
-            # restaurar_sql(baksql)

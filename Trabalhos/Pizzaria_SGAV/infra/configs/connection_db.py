@@ -10,8 +10,9 @@ from sqlalchemy.orm import sessionmaker as sm
 class DBConnection:
     '''Classe para controle de multiBD's'''
 
-    def __init__(self) -> None:
+    def __init__(self, db) -> None:
         # Importacao dos params
+        self.__db = db
         self.__loader = self.load_init()
         # String de cnx montada
         self.__str_mssql = self.__loader
@@ -27,7 +28,7 @@ class DBConnection:
         self.user = getenv('userdb')
         self.pw = getenv('password')
         self.server = getenv('server')
-        self.db = getenv('db_pdv')
+        self.db = self.__db
         self.driver = getenv('driver')
         self.port = getenv('port')
 

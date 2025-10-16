@@ -32,4 +32,4 @@ main_filme = respostas[0]
 # Consigo trazer os artistas que fizeram o filme que estou selecionando da lista
 print(main_filme.artistas)
 
-parei na aula 6, começar a 7
+#parei na aula 6, começar a 7
